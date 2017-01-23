@@ -1,0 +1,69 @@
+img[src=''] {
+	display:	none;
+}
+
+input[type="text"], 
+input[type="textbox"],
+select,
+textarea
+{
+	display:            inline-block;
+	background-color: 	rgb(255,255,255);
+	color: 				rgb(85,85,85);
+	box-shadow: 		rgba(0,​ 0,​ 0,​ 0.075) 0px 1px 1px 0px inset;
+	margin: 			0px;
+	padding-top: 		2px;
+	padding-bottom: 	2px;
+	padding-left: 		6px;
+	padding-right: 		6px;
+	
+	border-radius: 		4px;
+	border: 			1px solid rgb(204,204,204);
+}
+
+input[type="text"]:focus, input[type="textbox"]:focus {
+	border-color: #66afe9;
+	box-shadow: 0px 0px 1px #4285F4;
+}
+
+
+span.radio > input[type="radio"],
+span.checkbox > input[type="checkbox"]
+{
+	display: 		none;
+	position: 		absolute;
+	vertical-align: middle;
+} 
+
+span.radio > label:before,
+span.checkbox > label:before
+{
+	display: 	inline-block;
+	position: 	relative;
+	width:  16px;
+	height: 16px;
+	margin-right: 2px;
+	content: 	" ";
+	vertical-align: middle;
+	background: center center url(wliu.common/checkbox/wliu-checkbox.png) no-repeat;
+}
+
+span.radio > input[type="radio"]:checked + label:before,
+span.checkbox > input[type="checkbox"]:checked + label:before {
+	background: center center url(wliu.common/checkbox/wliu-checkbox-checked.png) no-repeat;
+}
+
+span.radio > input[type="radio"]:checked + label,
+span.checkbox > input[type="checkbox"]:checked + label {
+	color: 		#1a237e;
+}
+
+.wliuCommon-input-invalid {
+	border: 	1px solid red;
+	box-shadow: 0px 0px 2px red;
+}
+
+.wliuCommon-text-error {
+	color:					red;
+}
+

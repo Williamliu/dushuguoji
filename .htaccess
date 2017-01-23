@@ -1,0 +1,27 @@
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^dushuguoji\.net$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.dushuguoji\.net$
+RewriteRule ^(.*)$ "http\:\/\/www\.dushuguoji\.com\/$1" [R=301,L]
+
+# Use PHP5.6 as default
+AddHandler application/x-httpd-php56 .php
+
+# HostMonster.com
+# .htaccess main domain to subdirectory redirect
+# Do not change this line.
+# Change example.com to be your main domain.
+RewriteCond %{HTTP_HOST} ^(www.)?dushuguoji.com$
+# Change 'subdirectory' to be the directory you will use for your main domain.
+RewriteCond %{REQUEST_URI} !^/www/
+# Don't change the following two lines.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Change 'subdirectory' to be the directory you will use for your main domain.
+RewriteRule ^(.*)$ /www/$1
+# Change example.com to be your main domain again.
+# Change 'subdirectory' to be the directory you will use for your main domain
+# followed by / then the main file for your site, index.php, index.html, etc.
+RewriteCond %{HTTP_HOST} ^(www.)?dushuguoji.com$
+RewriteRule ^(/)?$ www/index.php [L] 
