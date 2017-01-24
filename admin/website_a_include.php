@@ -82,12 +82,11 @@ if(1==0) {
 	echo "</pre>";
 }
 ?>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
 <meta name="copyright" content="Copyright William Software Inc., All Rights Reserved." />
 <meta name="description" content="<?php echo $seo_row["seo_description"];?>" />
 <meta name="keywords" content="<?php echo $seo_row["seo_keyword"];?>" />
 <meta name="rating" content="general" />
-<meta name="language" content="English" />
 <meta name="robots" content="index" />
 <meta name="revisit-after" content="1 days" />
 <meta name="classification" content="<?php echo $seo_row["seo_class"];?>" />
@@ -96,9 +95,15 @@ if(1==0) {
 
 <title><?php echo $seo_row["seo_title"];?></title>
 
+<script type="text/javascript" src="<?php echo $CFG["web_domain"]?>/jquery/min/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="<?php echo $CFG["web_domain"]?>/jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<link href='<?php echo $CFG["web_domain"]?>/jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css' rel='stylesheet' type='text/css'>
+
+<!--
 <script type="text/javascript" src="<?php echo $CFG["web_domain"]?>/jquery/min/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<?php echo $CFG["web_domain"]?>/jquery/min/jquery-ui-1.8.21.custom.min.js"></script>
 <link type="text/css" 		 href="<?php echo $CFG["web_domain"]?>/jquery/theme/light/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
+-->
 
 <script type="text/javascript" 	src="<?php echo $CFG["web_domain"]?>/jquery/myplugin/jquery.lwh.common.js"></script>
 

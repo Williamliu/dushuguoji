@@ -57,51 +57,52 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 	<div class="wliu-diag-content">
 		<div class="row">
 			<div class="col-md-3 text-nowrap">
-				<table.label table="table" name="full_name"></table.label>
+				<form.label form="form" name="full_name"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<table.textbox table="table" name="full_name" rowsn="{{ table.rowno() }}"></table.textbox>
+				<form.textbox form="form" name="full_name" rowsn="0" tooltip="#mytips"></form.textbox>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-3 text-nowrap">
-				<table.label table="table" name="email"></table.label>
+				<form.label form="form" name="email"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<table.textbox table="table" name="email" rowsn="{{ table.rowno() }}"></table.textbox>
+				<form.textbox form="form" name="email" rowsn="0" tooltip="#mytips"></form.textbox>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<table.label table="table" name="phone"></table.label>
+				<form.label form="form" name="phone"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<table.textbox table="table" name="phone" rowsn="{{ table.rowno() }}"></table.textbox>
+				<form.textbox form="form" name="phone" rowsn="0" tooltip="#mytips"></form.textbox>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<table.label table="table" name="detail"></table.label>
+				<form.label form="form" name="detail"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<table.textarea table="table" name="detail" style="height:160px;width:100%;" rowsn="{{ table.rowno() }}"></table.textarea>
+				<form.textarea form="form" name="detail" style="height:160px;width:100%;" rowsn="0" tooltip="#mytips"></form.textarea>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<center>
-					<table.singlebutton table="table"	name="save" 		rowsn="{{ table.rowno() }}"	actname="提交"></table.singlebutton>
-					<table.singlebutton table="table"	name="cancel" 		rowsn="{{ table.rowno() }}"	actname="重写"></table.singlebutton>
+			<form.linkbutton form="form" rowsn="0" name="save" outline="1" actname="SAVE"></form.linkbutton>
+			<form.linkbutton form="form" rowsn="0" name="cancel" outline="1" actname="CANCEL"></form.linkbutton>
 				</center>
 		    </div>
 		</div>
 	</div>
 </div>
 
-<table.rowerror table="table" rowsn="{{ table.rowno() }}" targetid="taberror" maskable=0></table.rowerror>
-<table.wait table="table" targetid="mywait"></table.wait>
-<table.tips table="table" targetid="tabtips" halign="right" valign="bottom"></table.tips>
+<form.tooltip form="wform" targetid="mytips"></form.tooltip>
+<form.rowerror form="form" rowsn="0" targetid="taberror" maskable=0></form.rowerror>
+<form.wait form="form" targetid="mywait"></form.wait>
+<form.autotip form="form" targetid="tabtips"></form.autotip>
 </div>
 
 
@@ -119,15 +120,15 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 	cols.push(col4);
 	cols.push(col5);
 
-	var table = new WLIU.TABLE({
+	var form = new WLIU.FORM({
 		scope: 	"contactus",
 		url:   	"ajax/contactus_action.php",
 		
 		wait:   	"#mywait",
-		tips: 		"#tabtips",
+		tooltip:	"#mytips",		
+		autotip: 	"#tabtips",
 		rowerror:   "#taberror",
 		rights: {detail:1, add:1, save:1, cancel:1, clear:1, delete:1, print:1, output:1},
-		navi:   {pagesize:20, match: 1, orderby:"", sortby:""},
 		cols: 	cols,
 		callback: {
 			ajaxSuccess: function( theTable ) {
@@ -138,8 +139,8 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 	});
 
 	app.controller("DSGJ_ContactUS", function ($scope) {
-		table.setScope( $scope );
-		table.editRow();
+		form.setScope( $scope );
+		form.addRecord();
 	});
 
 

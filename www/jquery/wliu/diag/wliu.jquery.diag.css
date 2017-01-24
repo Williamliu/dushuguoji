@@ -42,6 +42,7 @@ div.wliu-diag > div.wliu-diag-title {
     padding-bottom:	0px;
     padding-left:   12px;
     padding-right:  12px;
+    box-sizing:     border-box;
 
     border: 		0px solid #999999;
     border-radius:  5px;

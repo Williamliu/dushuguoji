@@ -8,12 +8,12 @@ $CFG["http"]			= "http://";
 $CFG["web_domain"] 		= "http://www.dushu.com";
 $CFG["admin_domain"] 	= "http://admin.dushu.com";
 
-$CFG["web_root"] 		= "C:\Projects\www.dushuguoji.com";
-$CFG["admin_root"] 		= "C:\Projects\www.dushuguoji.com";
+$CFG["web_root"] 		= "C:\Projects\dushuguoji";
+$CFG["admin_root"] 		= "C:\Projects\dushuguoji";
 
 $CFG["include_path"] 	= $CFG["web_root"] . "/include";
 $CFG["report_path"] 	= $CFG["web_root"] . "/reports";
-$CFG["upload_path"] 	= "C:\Projects\www.dushuguoji.com";
+$CFG["upload_path"] 	= "C:\Projects\dushuguoji";
 
 
 // Theme and   use the theme folder name for Array key.

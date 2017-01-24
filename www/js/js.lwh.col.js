@@ -18,6 +18,7 @@ LWH.COL = function(opts) {
 	var _self = this;
 	var _constructor = function() {
 		/*** highlight selected checkbox and radio ***/
+		/*
 		$("input:checkbox[scope='" + _self.head.scope + "'][name]").die("click").live("click", function(ev) {
 			if( $(this).is(":checked") ) {
 				$(this).parent("label").addClass("lwhCommon-checked");
@@ -33,6 +34,7 @@ LWH.COL = function(opts) {
 				$(this).parent("label").removeClass("lwhCommon-checked");
 			}
 		});
+		*/
 		/**********************************************/
 
 		/*** dom change ***************************************/

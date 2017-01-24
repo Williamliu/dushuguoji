@@ -27,7 +27,11 @@
 
 
 <!-- wliu components -->
-<script src="js/wliu/wliu.base.js" type="text/javascript"></script>
+<script src="js/wliu/wliu.common.js" type="text/javascript"></script>
+<script src="js/wliu/wliu.table.js" type="text/javascript"></script>
+<script src="js/wliu/wliu.form.js" type="text/javascript"></script>
+<script src="js/wliu/wliu.table.common.js" type="text/javascript"></script>
+<script	src="angularjs/wliu/wliu.form.js" type="text/javascript"></script>
 <script	src="angularjs/wliu/wliu.table.js" type="text/javascript"></script>
 <script	src="angularjs/wliu/wliu.table.filter.js" type="text/javascript"></script>
 <script	src="angularjs/wliu/wliu.table.list.js" type="text/javascript"></script>
@@ -44,5 +48,5 @@
 <link href='theme/wliu/wliu.buttons.css' type='text/css' rel='stylesheet' />
 <!-- //wliu components -->
 <script language="javascript" type="text/javascript">
-var app = angular.module("myApp", ["wliuTable"]);
+var app = angular.module("myApp", ["wliuTable", "wliuForm"]);
 </script>

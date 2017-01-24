@@ -2,8 +2,6 @@
 <html>
 <head>
 <?php include("public_head.php"); ?>
-
-
 </head>
 <body ng-app="myApp">
 <?php include("public_menu.php"); ?>
@@ -33,8 +31,10 @@
 	cols.push(col8);
 	cols.push(col9);
 	cols.push(col10);
+	cols.push(col11);
+	cols.push(col12);
 
-	var student_table = new WLIU.TABLE({
+	var student_table = new WLIU.FORM({
 		scope: 	"contactus",
 		url:   	"ajax/service_action.php",
 		
@@ -47,8 +47,8 @@
 	});
 
 	app.controller("dsgj_studentform", function ($scope) {
-		student_table.setScope( $scope );
-		student_table.editRow();
+		student_table.setScope( $scope, "student_form" );
+		student_table.addRecord();
 	});
 </script>
 
@@ -69,26 +69,35 @@
 			</center>
 		</div>
 	</div>
-
-	<br><br>
-
 	<div class="row">
-		<div class="col-md-4">
-				<table.label table="table" name="school_name"></table.label>
+		<div class="col-md-3 text-nowrap">
+				<form.label form="student_form" name="school_name"></form.label>
 		</div>
-		<div class="col-md-8">
-				<table.textbox table="student_table" name="school_name" rowsn="{{ table.rowno() }}"></table.textbox>
+		<div class="col-md-9">
+				<form.textbox form="student_form" name="school_name" rowsn="0" style="width:100%"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
-				<table.label table="table" name="school_address"></table.label>
+		<div class="col-md-3 text-nowrap">
+				<form.label form="student_form" name="school_address"></form.label>
 		</div>
-		<div class="col-md-8">
-				<table.textbox table="student_table" name="school_address" rowsn="{{ table.rowno() }}"></table.textbox>
+		<div class="col-md-9">
+				<form.textbox form="student_form" name="school_address" rowsn="0" style="width:100%"></form.textbox>
 		</div>
 	</div>
-
+	<div class="row">
+		<div class="col-md-3 text-nowrap">
+			* 请提供录取函影印件 
+		</div>
+		<div class="col-md-9">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-nowrap">
+			<span style="text-decoration:underline;">Please check off services you require 请在以下所需项目上钩选</span>
+		</div>
+	</div>
+	
 </div>
 
 <?php include("public_foot.php"); ?>
