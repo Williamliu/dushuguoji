@@ -276,7 +276,9 @@ class cEMAIL {
 		$this->message .= "Content-Transfer-Encoding: base64" . $this->nl . $this->nl;
 		$this->message .= $this->body . $this->nl . $this->nl;
 		$this->message .= "--" . $this->boundary . $this->nl . $this->nl;
-		$this->message .= "--" . $this->boundary . "--" . $this->nl . $this->nl;
+		//$this->message .= "--" . $this->boundary . "--" . $this->nl . $this->nl;
+		
+	
 	}
 	
 	private function array_str($a) {

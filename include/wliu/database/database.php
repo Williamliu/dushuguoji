@@ -62,7 +62,6 @@ class cMYSQL implements iSQL {
 		switch($pnum) {
 			case 3:
 				$this->__open($params[0], $params[1], $params[2]);
-				//mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $this->link);
 				break;
 			case 4:
 				$this->__open($params[0], $params[1], $params[2]);
@@ -265,6 +264,41 @@ class cMYSQL implements iSQL {
 		return $row[$col];
 	}
 
+	public function checkUnique() {
+		$pnum 	= func_num_args();
+		$params	= func_get_args();
+		
+		$table = $params[0];
+		
+		// criteria 
+		$criteria = "deleted=0";
+		// col[col_name] = value;
+		$colVal = $params[1];
+		if( is_array($colVal) ) {
+			foreach($colVal as $key=>$val) {
+				if(trim($val)!="") {
+					cTYPE::join($criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'" );
+				} else {
+					return true;
+				}
+			}
+        } else {
+			return true;
+        }
+
+		if(is_array($params[2])) {
+			foreach($params[2] as $key=>$val) {
+				cTYPE::join($criteria, " AND ", $key . " <> '" . trim( cTYPE::quote($val) ) . "'" );
+			}
+		} else {
+			if($params[2]!="") cTYPE::join($criteria, " AND ", $params[2]);
+		}
+
+		$query = "SELECT 1 FROM $table WHERE $criteria";	
+		//echo "query: $query";
+		return !$this->exists($query);
+	}
+
 	// (tableName, colsArray, criteriaArray, navi(paging, orderby..) )	
 	public function select() {
 		$pnum 	= func_num_args();
@@ -287,7 +321,7 @@ class cMYSQL implements iSQL {
 		$criteria = "1=1";
 		if(is_array($params[2])) {
 			foreach($params[2] as $key=>$val) {
-				cTYPE::join($criteria, " AND ", $key . " = '" . trim( $this->quote($val) ) . "'" );
+				cTYPE::join($criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'" );
 			}
 		} else {
 			if($params[2]!="") cTYPE::join($criteria, " AND ", $params[2]);
@@ -338,7 +372,7 @@ class cMYSQL implements iSQL {
 		$values = "";
 		foreach($field_array as $key=>$val) {
 			$fields .= ($fields==""?$key: ", " . $key); 
-			$values .= ($values==""?"":", ") . "'" . $this->quote($val) . "'"; 
+			$values .= ($values==""?"":", ") . "'" . cTYPE::quote($val) . "'"; 
 		}
 		$query = "INSERT INTO " . $table . " (" . $fields . ") VALUES (" . $values . ")";
 		//echo "\nquery:" . $query;
@@ -377,16 +411,16 @@ class cMYSQL implements iSQL {
 		$criteria = "";
 		if(is_array($params[1])) {
 			foreach($params[1] as $key=>$val) {
-				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( $this->quote($val) ) . "'");
+				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'");
 			}
 		} else {
-			$criteria = "id = '" . trim( $this->quote($params[1]) ) . "'";
+			$criteria = "id = '" . trim( cTYPE::quote($params[1]) ) . "'";
 		}
 		
 		$fields_update = "";
 		foreach($field_array as $key=>$val) {
 				$val = $this->quote($val);
-				cTYPE::join( $fields_update, ", ",  $key . " = '" . $this->quote($val) . "'" );
+				cTYPE::join( $fields_update, ", ",  $key . " = '" . cTYPE::quote($val) . "'" );
 		}	
 		$query = "UPDATE " . $table . " SET " . $fields_update . " WHERE " . $criteria . ";";
 		//echo "\nquery:" . $query . "\n";
@@ -404,11 +438,11 @@ class cMYSQL implements iSQL {
 		$criteria = "";
 		if(is_array($params[1])) {
 			foreach($params[1] as $key=>$val) {
-				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( $this->quote($val) ) . "'");
+				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'");
 			}
 			$append_array = $params[1];
 		} else {
-			$criteria = "id = '" . trim( $this->quote($params[1]) ) . "'";
+			$criteria = "id = '" . trim( cTYPE::quote($params[1]) ) . "'";
 			$append_array["id"] = $params[1];
 		}
 		
@@ -418,7 +452,7 @@ class cMYSQL implements iSQL {
 			$fields_update = "";
 			foreach($field_array as $key=>$val) {
 					$val = $this->quote($val);
-					cTYPE::join( $fields_update, ", ",  $key . " = '" . $this->quote($val) . "'" );
+					cTYPE::join( $fields_update, ", ",  $key . " = '" . cTYPE::quote($val) . "'" );
 			}	
 			$query = "UPDATE " . $table . " SET " . $fields_update . " WHERE " . $criteria . ";";
 			//print_r($params[1]);
@@ -442,10 +476,10 @@ class cMYSQL implements iSQL {
 		$criteria = "";
 		if(is_array($params[1])) {
 			foreach($params[1] as $key=>$val) {
-				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( $this->quote($val) ) . "'" );
+				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'" );
 			}
 		} else {
-			$criteria = "id = '" . trim( $this->quote($params[1]) ) . "'";
+			$criteria = "id = '" . trim( cTYPE::quote($params[1]) ) . "'";
 		}
 		$query = "DELETE FROM " . $table . " WHERE " . $criteria . ";";
 		//echo "\nquery:" . $query . "\n";
@@ -460,10 +494,10 @@ class cMYSQL implements iSQL {
 		$criteria = "";
 		if(is_array($params[1])) {
 			foreach($params[1] as $key=>$val) {
-				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( $this->quote($val) ) . "'" );
+				cTYPE::join( $criteria, " AND ", $key . " = '" . trim( cTYPE::quote($val) ) . "'" );
 			}
 		} else {
-			$criteria = "id = '" . trim( $this->quote($params[1]) ) . "'";
+			$criteria = "id = '" . trim( cTYPE::quote($params[1]) ) . "'";
 		}
 		$query = "UPDATE " . $table . " SET deleted = 1 WHERE " . $criteria . ";";
 		//echo "\nquery:" . $query . "\n";
@@ -526,8 +560,8 @@ class cMYSQL implements iSQL {
 			// if primary table key has defval,  only select defval record
 			$pv = trim($colMeta[$pkey]["defval"]);
 			if( $pv ) {
-				//cTYPE::join($primary_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
-				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
+				//cTYPE::join($primary_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
+				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
 			} else {
 				// no default value, primary rows should be none
 				//cTYPE::join($primary_criteria, " AND ", "1=0");
@@ -692,8 +726,8 @@ class cMYSQL implements iSQL {
 			// if primary table key has defval,  only select defval record
 			$pv = trim($colMeta[$pkey]["defval"]);
 			if( $pv ) {
-				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
-				//cTYPE::join($primary_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
+				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
+				//cTYPE::join($primary_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
 			} else {
 				// no default value, primary rows should be none
 				//cTYPE::join($primary_criteria, " AND ", "1=0");
@@ -928,6 +962,7 @@ class cMYSQL implements iSQL {
 		$sname  = $stable["name"];
 	
 		$pkeys  = $ptable["keys"];
+		$skeys  = $stable["keys"];
 		$sfkeys = $stable["fkeys"];
 	
 		$joinOn 		= "";
@@ -941,8 +976,8 @@ class cMYSQL implements iSQL {
 			// if primary table key has defval,  only select defval record
 			$pv = trim($colMeta[$pkey]["defval"]);
 			if( $pv ) {
-				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
-				cTYPE::join($primary_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
+				cTYPE::join($pk_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
+				cTYPE::join($primary_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
 			} else {
 				//if defval is empty, rows of both primary and return should be none
 				cTYPE::join($pk_criteria, " AND ", "1=0");
@@ -955,7 +990,7 @@ class cMYSQL implements iSQL {
 			$sk = $colMap[$skey];
 			$sv = trim($colMeta[$skey]["defval"]);
 			if( $sv ) {
-				cTYPE::join($sk_criteria, " AND ", "b.$sk='" . $this->quote($sv) . "'");
+				cTYPE::join($sk_criteria, " AND ", "b.$sk='" . cTYPE::quote($sv) . "'");
 			}		
 		}
 
@@ -1180,8 +1215,8 @@ class cMYSQL implements iSQL {
 
 			$pv = trim($colMeta[$pkey]["defval"]);
 			if( $pv ) {
-				cTYPE::join($pjoinOn, " AND " , "a.$pk='" . $this->quote($pv) . "'");
-				cTYPE::join($primary_criteria, " AND ", "a.$pk='" . $this->quote($pv) . "'");
+				cTYPE::join($pjoinOn, " AND " , "a.$pk='" . cTYPE::quote($pv) . "'");
+				cTYPE::join($primary_criteria, " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");
 			} else {
 				//if defval is empty, rows of both primary and return should be none
 				cTYPE::join($pk_criteria, " AND " ,		"1=0");
@@ -1201,6 +1236,8 @@ class cMYSQL implements iSQL {
 		$result_primary 	= $this->query($query_primary);
 		$table["primary"] 	= $this->rows($result_primary);
 
+		//important for m2m:  if primary record not found,  return 0 rows
+		if( $this->row_nums($result_primary) <= 0 )  cTYPE::join($pk_criteria, " AND ", "1=0");
 
 		foreach($mcols as $ff) {
 			$dbName = $colMap[$ff]?$colMap[$ff]:$ff;
@@ -1231,7 +1268,7 @@ class cMYSQL implements iSQL {
 			$sk = $colMap[$skey];
 			$sv = trim($colMeta[$skey]["defval"]);
 			if( $sv ) {
-				cTYPE::join($sk_criteria, " AND ", "b.$sk='" . $this->quote($sv) . "'");
+				cTYPE::join($sk_criteria, " AND ", "b.$sk='" . cTYPE::quote($sv) . "'");
 			}		
 		}
 		// criteria 
@@ -1368,9 +1405,6 @@ class cMYSQL implements iSQL {
 							$row["cols"][$cidx]["value"] = $mmKeys[ $colMap[$row["cols"][$cidx]["name"]] ];
 
 						}
-						
-
-
 					} else {
 						$errMsg["save"] 				= "You don't have right to change data.";
 						$table["success"] 				= 0;
@@ -1396,7 +1430,6 @@ class cMYSQL implements iSQL {
 							}
 						}
 
-						
 						if( !$row["error"]["errorCode"] ) {
 							$mmCols = cACTION::getSaveCols($table, "medium", $row);
 							$ssCols = cACTION::getSaveCols($table, "second", $row);
@@ -1423,7 +1456,6 @@ class cMYSQL implements iSQL {
 							foreach( $mskeys as $fidx=>$fkey ) {
 								$mmCols["keys"][ $colMap[$fkey] ] = $ssCols["keys"][$colMap[$skeys[$fidx]]];
 							}
-
 							$cidx = cARRAY::arrayIndex($row["cols"], array("coltype"=>"relation"));	
 							if($cidx >= 0) {
 								//print_r($mmCols["fields"]);
@@ -1437,7 +1469,8 @@ class cMYSQL implements iSQL {
 										$this->modify($mname, $mmCols["keys"], $mmCols["fields"]);
 									} 
 								} else {
-									$this->detach($mname, $mmKeys);
+									// insert case:  uncheck relationship,  just create primary one record , second record not created, so medium table do nothing
+									//$this->detach($mname, $mmKeys);
 								}
 
 								$row["cols"][$cidx]["value"] =  $mmCols["keys"][ $colMap[$row["cols"][$cidx]["name"]] ];
@@ -1518,8 +1551,8 @@ class cMYSQL implements iSQL {
 /***********************************************************************************************/
 class cACTION {
 	static public function action($db, &$table ) {
-		cACTION::colMap($table);
-		cACTION::colMeta($table);
+		$table["colmap"] 	= cACTION::colMap($table);
+		$table["colmeta"] 	= cACTION::colMeta($table);
 		$table["success"] = 1;
 		switch( $table["action"] ) {
 			case "init":
@@ -1548,6 +1581,7 @@ class cACTION {
 			case "save":
 				cLIST::getList($db, $table);
 				cVALIDATE::validate($table);
+				cACTION::checkUniques($db, $table);
 				cACTION::saveRows($db, $table);
 				break;
 			case "init":
@@ -1612,7 +1646,7 @@ class cACTION {
 		foreach($table["cols"] as $colMeta) {
 			$arr[$colMeta["name"]]=$colMeta;
 		}
-		$table["colmeta"] = $arr;
+		return $arr;
 	}
 
 	static public function colMap(&$table) {
@@ -1620,7 +1654,7 @@ class cACTION {
 		foreach($table["cols"] as $colMeta) {
 			$arr[$colMeta["name"]]=$colMeta["col"];
 		}
-		$table["colmap"] = $arr;
+		return $arr;
 	}
 
 	static public function clearRows(&$table) {
@@ -1645,6 +1679,7 @@ class cACTION {
 							unset($theCol["datatype"]);
 							unset($theCol["need"]);
 							unset($theCol["notnull"]);
+							unset($theCol["unique"]);
 							unset($theCol["minlength"]);
 							unset($theCol["maxlength"]);
 							unset($theCol["min"]);
@@ -1915,12 +1950,140 @@ class cACTION {
 			// end of update case  +  insert case without error
 		}
 	}
+    static public function checkUnique($db, &$table, $tableLevel) {
+		$is_unique = true;
+		$colMap 		= cACTION::colMap($table);
+		$colMeta 		= cACTION::colMeta($table);
+		$tableMeta 		= $table["metadata"][$tableLevel];
+		$tableName 		= $tableMeta["name"];
+		$tableColNames  = cACTION::getCols($table, $tableLevel, "get");
+		$uCols = cARRAY::arrayFilter($table["cols"], array("unique"=>1));
 
+		foreach( $uCols as $uCol ) {
+			$uCol_name = $uCol["name"];
+			if( in_array( $uCol_name, $tableColNames ) ) {
+				foreach( $table["rows"] as &$theRow ) {
+					$cidx = cARRAY::arrayIndex( $theRow["cols"], array("name"=>$uCol_name) );
+					$theCol = $theRow["cols"][$cidx];
+					$valKV  = array( $uCol["col"]=>$theCol["value"] );
+					
+					$keyKV 	= array();
+					switch($tableLevel) {
+						case "primary":
+						case "second":
+							$rKeys 	=$tableMeta["keys"];
+							foreach( $rKeys as $rkey) {
+								$key_col = $colMap[$rkey];
+								$temp_cidx = cARRAY::arrayIndex( $theRow["cols"], array("name"=>$rkey)  );
+								$rCol = $theRow["cols"][$temp_cidx];
+								$keyKV[$key_col] = $rCol["value"];
+							}
+							break;
+						case "medium":
+							// create keys array() for database where clause
+							if( $tableLevel=="medium" ) {
+								foreach($tableMeta["keys"] as $fidx=>$rkey) {
+									$pkey_name = $colMap[$table["metadata"]["primary"]["keys"][$fidx]];
+									$temp_cidx = cARRAY::arrayIndex( $theRow["cols"], array("name"=>$pkey_name)  );
+									$rCol = $theRow["cols"][$temp_cidx];
+									$keyKV[$colMap[$rkey]] =  $rCol["value"];
+								}
+
+								foreach($tableMeta["fkeys"] as $fidx=>$rkey) {
+									$pkey_name = $colMap[$table["metadata"]["second"]["keys"][$fidx]];
+									$temp_cidx = cARRAY::arrayIndex( $theRow["cols"], array("name"=>$pkey_name)  );
+									$rCol = $theRow["cols"][$temp_cidx];
+									$keyKV[$colMap[$rkey]] =  $rCol["value"];
+								}
+							}
+							break;
+					}
+
+	
+					/*
+					print_r($keyKV);
+					echo "-------\n";
+					print_r($valKV);
+					echo "-------\n";
+					echo "-------\n";
+					*/
+					switch($theRow["rowstate"]) {
+						case 0:
+							break;
+						case 1:
+							$is_unique = $db->checkUnique($tableName, $valKV, $keyKV);
+							if(!$is_unique) {
+								$table["success"] 				= 0;
+								$theRow["error"]["errorCode"] 	= 1;
+								$theRow["cols"][$cidx]["errorCode"] 		= 1;  
+								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already used in our database.";  
+							}
+							break;
+						case 2:
+							$is_unique = $db->checkUnique($tableName, $valKV);
+							if(!$is_unique) {
+								$table["success"] 				= 0;
+								$theRow["error"]["errorCode"] 	= 1;
+								$theRow["cols"][$cidx]["errorCode"] 		= 1;  
+								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already used in our database.";  
+							}
+							break;
+						case 3:
+							break;
+					}
+
+				}
+			}
+		}
+		return $is_unique;
+	}
+	static public function checkUniques($db, &$table) {
+		switch( $table["metadata"]["type"] ) {
+			case "one":
+				cACTION::checkUnique($db, $table, "primary");
+				break;
+			case "one2one":
+				cACTION::checkUnique($db, $table, "primary");
+				cACTION::checkUnique($db, $table, "second");
+				break;
+			case "one2many":
+				cACTION::checkUnique($db, $table, "primary");
+				cACTION::checkUnique($db, $table, "second");
+				break;
+			case "many2many":
+				cACTION::checkUnique($db, $table, "primary");
+				cACTION::checkUnique($db, $table, "second");
+				cACTION::checkUnique($db, $table, "medium");
+				break;
+		}
+	}
 
 	static public function filter(&$table, $tableCol, $val) {
 		cTYPE::join($table["criteria"], " AND ", "$tableCol = '" . cTYPE::quote($val) . "'");
 	}
 
+	static public function formFilter(&$table) {
+		$colMap 	= cACTION::colMap($table);
+		$colMeta 	= cACTION::colMeta($table);
+
+		// join tables 
+		$ptable = $table["metadata"]["primary"];
+		$pname  = $ptable["name"];
+		$pkeys  = $ptable["keys"];
+
+		//$primary_criteria = "1=1";
+		foreach($pkeys as $idx=>$pkey) {
+			$pk = $colMap[$pkey];
+			$pv = trim($colMeta[$pkey]["defval"]);
+			if( $pv ) {
+				cTYPE::join($table["criteria"], " AND ", "a.$pk='" . cTYPE::quote($pv) . "'");				
+			} else {
+				// load data for form.
+				cTYPE::join($table["criteria"], " AND ", "1=0");				
+			}
+		}
+	}
+	
 	static public function getFilters(&$table) {
 		$criteria = "";
 
@@ -1963,6 +2126,7 @@ class cACTION {
 				cTYPE::join($criteria, " AND ", $temp_ccc);
 			}
 		}
+		//echo "criteria:  $criteria";
 		cTYPE::join($table["criteria"], " AND ",  $criteria);
 	}
 
@@ -1973,13 +2137,25 @@ class cACTION {
 		switch( $filter["coltype"] ) {
 			case "textbox":
 				$compare 	= $filter["compare"]?$filter["compare"]:"LIKE";
+
+				/*** common part ***/
+				$val 		= $filter["value"]?trim($filter["value"]):"";
+				if($need) {
+					if($val!="") 
+						$ret_ccc = cACTION::getOperation($tableCol, $compare, $val);
+					else 
+						$ret_ccc = "1=0";
+				} else {
+					if($val!="") $ret_ccc = cACTION::getOperation($tableCol, $compare, $val);
+				}
+				/*** end of common part ***/
+				break;
+
 			case "radio":
-				$compare 	= $filter["compare"]?$filter["compare"]:"=";
 			case "date":
-				$compare 	= $filter["compare"]?$filter["compare"]:"=";
 			case "time":
 				$compare 	= $filter["compare"]?$filter["compare"]:"=";
-			
+
 				/*** common part ***/
 				$val 		= $filter["value"]?trim($filter["value"]):"";
 				if($need) {
@@ -2239,6 +2415,7 @@ class cVALIDATE {
 										$theRow["error"]["errorCode"] 	= 1;
 										$theCol["errorCode"] 			= 1;  
 										$theCol["errorMessage"] 		= "'" . $dispName . "' is invalid ". ucwords($dataType) . " format.";  
+										//print_r($theCol);
 									}
 								}
 
@@ -2612,6 +2789,24 @@ class cLIST {
 /*																							   */
 /***********************************************************************************************/
 class cARRAY {
+	static public function arrayFilter($arr, $kv) {
+        $ret = array();
+        foreach($arr as $ar ) {
+                $match = true;
+                if(is_array($kv) ) {
+                    foreach($kv as $key=>$val) {
+                        if( $ar[$key]!=$val ) {
+                            $match=false;
+                            break;
+                        }
+                    }
+                } else {
+                    $match = false;
+                }
+                if($match) $ret[] = $ar;
+        }
+        return $ret;
+	}
 	static public function arrayIndex($arr, $kv ) {
 		$ret_idx = -1;
 		$match = true;
