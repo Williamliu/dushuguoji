@@ -12,8 +12,6 @@ try {
 	/*** common secure : prevent url hack from hack tool ***/
 	$db = new cMYSQL($CFG["mysql"]["host"], $CFG["mysql"]["user"], $CFG["mysql"]["pwd"], $CFG["mysql"]["database"]);
 	$table = $_REQUEST["table"]; 
-
-	// 1) rights
 	$table["rights"] = $rights;
 
 	// 2) list table : list1, list2, list3, cate1, cate2, cate3

@@ -21,17 +21,17 @@
 	var col11 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_state", 	colname:"Province/Territory 省"});
 	var col12 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_city", 	colname:"City/Town 城市"});
 	var col13 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_postal", 	colname:"Postal Code 邮编"});
-	var col14 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_email", 	colname:"E-mail 电子邮件", need:1, notnull:1});
+	var col14 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_email", 	colname:"E-mail 电子邮件", need:1, notnull:1, datatype:"email"});
 	var col15 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_phone", 	colname:"Phone 电话"});
 	var col16 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_wechat", 	colname:"WeChat 微信"});
 	var col17 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_fname",	colname:"Father's Name 父亲姓名", need:1,  notnull:1});
-	var col18 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_email", 	colname:"E-mail 父亲邮件", need:0, notnull:0});
+	var col18 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_email", 	colname:"E-mail 父亲邮件", need:0, notnull:0, datatype:"email"});
 	var col19 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_phone", 	colname:"Phone 父亲电话"});
 	var col20 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_wechat", 	colname:"WeChat 父亲微信"});
 	var col21 = new WLIU.COL({key:0, coltype:"date", 		name:"dad_birth", 	colname:"BirthDate 父亲生日", need:0, notnull:0});
 
 	var col22 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_fname",	colname:"Mother's Name 母亲姓名", need:1,  notnull:1});
-	var col23 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_email", 	colname:"E-mail 母亲邮件", need:0, notnull:0});
+	var col23 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_email", 	colname:"E-mail 母亲邮件", need:0, notnull:0, datatype:"email"});
 	var col24 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_phone", 	colname:"Phone 母亲电话"});
 	var col25 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_wechat", 	colname:"WeChat 母亲微信"});
 	var col26 = new WLIU.COL({key:0, coltype:"date", 		name:"mom_birth", 	colname:"BirthDate 母亲生日", need:0, notnull:0});
@@ -199,7 +199,7 @@
 				<form.label form="student_form" name="school_name"></form.label>
 		</div>
 		<div class="col-md-9">
-				<form.textbox form="student_form" name="school_name" rowsn="0" style="width:100%"></form.textbox>
+				<form.textbox form="student_form" name="school_name" rowsn="0" style="width:100%"  tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -207,7 +207,7 @@
 				<form.label form="student_form" name="school_address"></form.label>
 		</div>
 		<div class="col-md-9">
-				<form.textbox form="student_form" name="school_address" rowsn="0" style="width:100%"></form.textbox>
+				<form.textbox form="student_form" name="school_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -223,7 +223,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-nowrap">
-				<form.checkbox form="student_form" name="ck_service" rowsn="0" colnum="1"></form.checkbox>
+				<form.checkbox form="student_form" name="ck_service" rowsn="0" colnum="1" tooltip="#wmtips"></form.checkbox>
 		</div>
 	</div>
 	<div class="row">
@@ -235,7 +235,7 @@
 		<div class="col-md-12">
 			<div style="padding-left:30px;">
 				关于: <a href="http://www.dushuguoji.com/nxservice.php#nx" target="_blank">暖心服务</a> | <a href="http://www.dushuguoji.com/nxservice.php#tx" target="_blank">贴心服务</a> | <a href="http://www.dushuguoji.com/nxservice.php#qz" target="_blank">亲子服务</a> 
-				<form.radio form="student_form" name="rd_service" rowsn="0" colnum="1"></form.radio>
+				<form.radio form="student_form" name="rd_service" rowsn="0" colnum="1" tooltip="#wmtips"></form.radio>
 			</div>
 		</div>
 	</div>
@@ -261,19 +261,19 @@
 			<form.label form="student_form" name="stu_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_lname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_oname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_oname" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_oname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -281,7 +281,7 @@
 			<form.label form="student_form" name="passport"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="passport" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="passport" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-8 text-md-left">
 			<span class="wliuCommon-tips">请提供护照信息页影印件 </span>
@@ -292,7 +292,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			English Proficiency via Standardized Tests, IELTS, TOEFL 英文成绩TOEFL或雅思 (如果有)
-			<form.textbox class="input-large" form="student_form" name="en_score" rowsn="0"></form.textbox>
+			<form.textbox class="input-large" form="student_form" name="en_score" rowsn="0" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -306,19 +306,19 @@
 			<form.label form="student_form" name="stu_address"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_address" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_state"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_state" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_state" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_city"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_city" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_city" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -326,19 +326,19 @@
 			<form.label form="student_form" name="stu_postal"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_postal" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_postal" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_phone" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="stu_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_email" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_email" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -346,7 +346,7 @@
 			<form.label form="student_form" name="stu_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_wechat" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_wechat" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -360,7 +360,7 @@
 			<form.label form="student_form" name="par_address"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
-			<form.textbox form="student_form" name="par_address" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="par_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -368,19 +368,19 @@
 			<form.label form="student_form" name="par_state"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="par_state" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="par_state" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="par_city"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="par_city" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="par_city" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="par_postal"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="par_postal" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="par_postal" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -389,13 +389,13 @@
 			<form.label form="student_form" name="dad_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="dad_fname" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="dad_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="dad_birth"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.date form="student_form" name="dad_birth" rowsn="0"></form.date>
+			<form.date form="student_form" name="dad_birth" rowsn="0" tooltip="#wmtips"></form.date>
 		</div>
 		<div class="col-md-4 text-md-left">
 			<span class="wliuCommon-tips">如果选择法律监护服务，请提供父亲和母亲的生日</span>
@@ -406,19 +406,19 @@
 			<form.label form="student_form" name="dad_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="dad_phone" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="dad_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="dad_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="dad_email" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="dad_email" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="dad_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="dad_wechat" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="dad_wechat" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -427,13 +427,13 @@
 			<form.label form="student_form" name="mom_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="mom_fname" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="mom_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="mom_birth"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.date form="student_form" name="mom_birth" rowsn="0"></form.date>
+			<form.date form="student_form" name="mom_birth" rowsn="0" tooltip="#wmtips"></form.date>
 		</div>
 		<div class="col-md-4 text-md-left">
 			<span class="wliuCommon-tips">如果选择法律监护服务，请提供父亲和母亲的生日</span>
@@ -444,19 +444,19 @@
 			<form.label form="student_form" name="mom_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="mom_phone" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="mom_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="mom_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="mom_email" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="mom_email" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="mom_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="mom_wechat" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="mom_wechat" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -477,19 +477,19 @@
 			<form.label form="student_form" name="airline"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="airline" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="airline" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="flight"></form.label>
 		</div>
 		<div class="col-md-1 text-md-left">
-			<form.textbox form="student_form" name="flight" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="flight" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="pickup_datetime"></form.label>
 		</div>
 		<div class="col-md-3 text-md-left">
-			<form.datetime form="student_form" name="pickup_datetime" rowsn="0"></form.datetime>
+			<form.datetime form="student_form" name="pickup_datetime" rowsn="0" tooltip="#wmtips"></form.datetime>
 		</div>
 	</div>
 	<div class="row">
@@ -499,7 +499,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.textbox form="student_form" name="destination" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="destination" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -526,10 +526,10 @@
 			<span style="font-size:14px;margin-left:20px;">5. 寄宿家长为学生提供一日三餐和必要的零食</span><br>
 			
 			<form.label form="student_form" name="homestay_start"></form.label>
-			<form.date form="student_form" name="homestay_start" rowsn="0"></form.date>
+			<form.date form="student_form" name="homestay_start" rowsn="0" tooltip="#wmtips"></form.date>
 			<span style="margin-left:100px;">&nbsp;</span>
 			<form.label form="student_form" name="homestay_end"></form.label>
-			<form.date form="student_form" name="homestay_end" rowsn="0"></form.date>
+			<form.date form="student_form" name="homestay_end" rowsn="0" tooltip="#wmtips"></form.date>
 		</div>
 	</div>
 	<br>
@@ -545,7 +545,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.textbox form="student_form" name="health_medicine" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="health_medicine" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -556,7 +556,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.textbox form="student_form" name="health_horby" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="health_horby" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<br>
@@ -566,11 +566,11 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3 text-md-right">
+		<div class="col-md-4 text-md-right">
 			<form.label form="student_form" name="per_character"></form.label>
 		</div>
-		<div class="col-md-9 text-md-left">
-			<form.textbox form="student_form" name="per_character" rowsn="0" style="width:100%"></form.textbox>
+		<div class="col-md-8 text-md-left">
+			<form.textbox form="student_form" name="per_character" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -578,19 +578,19 @@
 			<form.label form="student_form" name="per_horby"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="per_horby" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="per_horby" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="per_sport"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="per_sport" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="per_sport" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="per_music"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="per_music" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="per_music" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -598,13 +598,13 @@
 			<form.label form="student_form" name="per_food"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="per_food" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="per_food" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
 			<form.label form="student_form" name="per_vegit"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.bool form="student_form" name="per_vegit" rowsn="0"></form.bool>
+			<form.bool form="student_form" name="per_vegit" rowsn="0" tooltip="#wmtips"></form.bool>
 		</div>
 	</div>
 	<br>
@@ -618,7 +618,7 @@
 			<form.label form="student_form" name="homestay_child"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
-			<form.checkbox form="student_form" name="homestay_child" rowsn="0" colnum="0"></form.checkbox>
+			<form.checkbox form="student_form" name="homestay_child" rowsn="0" colnum="0" tooltip="#wmtips"></form.checkbox>
 		</div>
 	</div>
 	<div class="row">
@@ -626,7 +626,7 @@
 			<form.label form="student_form" name="homestay_envir"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
-			<form.radio form="student_form" name="homestay_envir" rowsn="0" colnum="0"></form.radio>
+			<form.radio form="student_form" name="homestay_envir" rowsn="0" colnum="0" tooltip="#wmtips"></form.radio>
 		</div>
 	</div>
 	<div class="row">
@@ -634,7 +634,7 @@
 			<form.label form="student_form" name="homestay_other"></form.label>
 		</div>
 		<div class="col-md-6 text-md-left">
-			<form.textbox form="student_form" name="homestay_other" rowsn="0" style="width:100%;"></form.textbox>
+			<form.textbox form="student_form" name="homestay_other" rowsn="0" style="width:100%;" tooltip="#wmtips"></form.textbox>
 		</div>
 		<div class="col-md-4 text-md-left">
 			<span class="wliuCommon-tips">加拿大家庭通常都有宠物，大部分是狗和猫</span>
@@ -649,7 +649,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.textarea form="student_form" name="homestay_letter" rowsn="0" style="width:100%;height:120px;"></form.textarea>
+			<form.textarea form="student_form" name="homestay_letter" rowsn="0" style="width:100%;height:120px;" tooltip="#wmtips"></form.textarea>
 		</div>
 	</div>
 	<div class="row">
@@ -659,7 +659,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.textarea form="student_form" name="homestay_concern" rowsn="0" style="width:100%;height:120px;"></form.textarea>
+			<form.textarea form="student_form" name="homestay_concern" rowsn="0" style="width:100%;height:120px;" tooltip="#wmtips"></form.textarea>
 		</div>
 	</div>
 	<br>
@@ -678,8 +678,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<center>
-				<form.linkbutton form="student_form" rowsn="0" name="save"  	actname="提交表格"></form.linkbutton>
-				<form.linkbutton form="student_form" rowsn="0" name="cancel" 	actname="清除重填"></form.linkbutton>
+				<form.linkbutton form="student_form" rowsn="0" name="save"  	actname="提交表格" tooltip="#wmtips"></form.linkbutton>
+				<form.linkbutton form="student_form" rowsn="0" name="cancel" 	actname="清除重填" tooltip="#wmtips"></form.linkbutton>
+				<form.rowstatus form="student_form" rowsn="0" tooltip="#wmtips"></form.rowstatus>
 			</center>
 		</div>
 	</div>
