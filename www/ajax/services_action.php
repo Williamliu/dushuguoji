@@ -4,7 +4,7 @@ ini_set("display_errors", 0);
 include_once("../../include/config/config.php");
 include_once($CFG["include_path"] . "/wliu/database/database.php");
 include_once($CFG["include_path"] . "/wliu/email/email.php");
-define("DEBUG", 0);
+define("DEBUG", 1);
 $response = array();
 try {
 	$rights = array("view"=>1, "save"=>1, "add"=>1, "delete"=>1);
@@ -32,7 +32,7 @@ try {
 							"name"=>"dsgj_studentform", 
 							"keys"=>array("id"),  
 							"fkeys"=>array(), 
-							"cols"=>array("id","first_name", "last_name", "other_name", "email"), 
+							"cols"=>array("id","stu_fname", "stu_lname", "stu_oname", "stu_email"), 
 							"insert"=>array("status"=>1), 
 							"update"=>array()  
 					),
@@ -45,7 +45,7 @@ try {
 	$table["metadata"] = $tableMeta; 	
 
 	// 4) action 
-	cACTION::filter($table, "id", -1);
+	cACTION::formFilter($table);
 	cACTION::action($db, $table);
 
 	// 5) if success ,  to do other thing

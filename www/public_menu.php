@@ -60,7 +60,7 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 				<form.label form="form" name="full_name"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<form.textbox form="form" name="full_name" rowsn="0" tooltip="#mytips"></form.textbox>
+				<form.textbox form="form" name="full_name" rowsn="0" tooltip="#wmtips"></form.textbox>
 			</div>
 		</div>
 
@@ -69,7 +69,7 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 				<form.label form="form" name="email"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<form.textbox form="form" name="email" rowsn="0" tooltip="#mytips"></form.textbox>
+				<form.textbox form="form" name="email" rowsn="0" tooltip="#wmtips"></form.textbox>
 			</div>
 		</div>
 		<div class="row">
@@ -77,7 +77,7 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 				<form.label form="form" name="phone"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<form.textbox form="form" name="phone" rowsn="0" tooltip="#mytips"></form.textbox>
+				<form.textbox form="form" name="phone" rowsn="0" tooltip="#wmtips"></form.textbox>
 			</div>
 		</div>
 		<div class="row">
@@ -85,7 +85,7 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 				<form.label form="form" name="detail"></form.label>
 		    </div>
 			<div class="col-md-9">		
-				<form.textarea form="form" name="detail" style="height:160px;width:100%;" rowsn="0" tooltip="#mytips"></form.textarea>
+				<form.textarea form="form" name="detail" style="height:160px;width:100%;" rowsn="0" tooltip="#wmtips"></form.textarea>
 			</div>
 		</div>
 		<div class="row">
@@ -99,10 +99,10 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 	</div>
 </div>
 
-<form.tooltip form="wform" targetid="mytips"></form.tooltip>
+<form.tooltip targetid="wmtips"></form.tooltip>
 <form.rowerror form="form" rowsn="0" targetid="taberror" maskable=0></form.rowerror>
-<form.wait form="form" targetid="mywait"></form.wait>
-<form.autotip form="form" targetid="tabtips"></form.autotip>
+<form.wait targetid="wmwait"></form.wait>
+<form.autotip targetid="wmautotip"></form.autotip>
 </div>
 
 
@@ -124,9 +124,9 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 		scope: 	"contactus",
 		url:   	"ajax/contactus_action.php",
 		
-		wait:   	"#mywait",
-		tooltip:	"#mytips",		
-		autotip: 	"#tabtips",
+		wait:   	"#wmwait",
+		tooltip:	"#wmtips",		
+		autotip: 	"#wmautotip",
 		rowerror:   "#taberror",
 		rights: {detail:1, add:1, save:1, cancel:1, clear:1, delete:1, print:1, output:1},
 		cols: 	cols,

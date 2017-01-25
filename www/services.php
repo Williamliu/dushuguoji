@@ -7,8 +7,9 @@
 <?php include("public_menu.php"); ?>
 
 <script language="javascript" type="text/javascript">
-	var col1 = new WLIU.COL({key:0, coltype:"textarea", 	name:"school_name", 	colname:"Name of School 学校名称 (英文)" });
-	var col2 = new WLIU.COL({key:0, coltype:"textarea", 	name:"school_address", 	colname:"Address of School 学校地址 (英文)" });
+	var col0 = new WLIU.COL({key:1, coltype:"hidden", 		name:"id", 				colname:"ID" });
+	var col1 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_name", 	colname:"Name of School 学校名称 (英文)" });
+	var col2 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_address", 	colname:"Address of School 学校地址 (英文)" });
 	var col3 = new WLIU.COL({key:0, coltype:"checkbox", 	name:"ck_service", 		colname:"Please check off services you require 请在以下所需项目上钩选", list: "mservice" });
 	var col4 = new WLIU.COL({key:0, coltype:"radio", 		name:"rd_service", 		colname:"4. Dedicated Student Support Package for School, Homestay and Career 家长放心服务包", list: "sservice" });
 	var col5 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_fname",	colname:"First Name 名", need:1,  notnull:1});
@@ -60,6 +61,7 @@
 	var col49 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_concern",colname:"Parental Concerns 学生家长关心的问题 (请家长填写)"});
 
 	var cols = [];
+	cols.push(col0);
 	cols.push(col1);
 	cols.push(col2);
 	cols.push(col3);
@@ -150,9 +152,9 @@
 		scope: 	"contactus",
 		url:   	"ajax/service_action.php",
 		
-		wait:   	"#mywait",
-		tips: 		"#tabtips",
-		rowerror:   "#taberror",
+		wait:   	"#wmwait",
+		tips: 		"#wmtips",
+		autotip:    "#wmautotip",
 		rights: {detail:1, add:1, save:1, cancel:1, clear:1, delete:1, print:1, output:1},
 		navi:   {pagesize:20, match: 1, orderby:"", sortby:""},
 		cols: 	cols,
@@ -256,22 +258,22 @@
 	</div>
 	<div class="row">
 		<div class="col-md-2 text-md-right">
-			<form.label form="student_form" name="first_name"></form.label>
+			<form.label form="student_form" name="stu_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="first_name" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
-			<form.label form="student_form" name="last_name"></form.label>
+			<form.label form="student_form" name="stu_lname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="last_name" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%"></form.textbox>
 		</div>
 		<div class="col-md-2 text-md-right">
-			<form.label form="student_form" name="other_name"></form.label>
+			<form.label form="student_form" name="stu_oname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="other_name" rowsn="0" style="width:100%"></form.textbox>
+			<form.textbox form="student_form" name="stu_oname" rowsn="0" style="width:100%"></form.textbox>
 		</div>
 	</div>
 	<div class="row">
@@ -383,7 +385,7 @@
 	</div>
 	<br>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="dad_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -421,7 +423,7 @@
 	</div>
 	<br>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="mom_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
