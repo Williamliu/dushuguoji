@@ -320,7 +320,7 @@ wliu_table.directive("table.head", function () {
             tooltip:    "@"
         },
         template: [
-                    '<label for="navi_{{table.scope}}_{{name}}" class="wliuCommon-label" scope="{{ table.scope }}" ',
+                    '<label for="navi_{{table.scope}}_{{name}}" class="wliuCommon-header" scope="{{ table.scope }}" ',
                         'wliu-popup popup-target="{{tooltip?tooltip:\'\'}}" popup-toggle="hover" popup-content="{{table.colMeta(name).coldesc?table.colMeta(name).coldesc:table.colMeta(name).colname?table.colMeta(name).colname:name}}" ',
                         'title="{{tooltip? \'\':table.colMeta(name).coldesc?table.colMeta(name).coldesc:table.colMeta(name).colname?table.colMeta(name).colname:name}}" ',
                     '>',
@@ -3303,7 +3303,6 @@ wliu_table.directive("table.tooltip", function (wliuTableService) {
         restrict: "E",
         replace: true,
         scope: {
-            table:      "=",
             targetid:   "@"
         },
         template: [
@@ -3324,7 +3323,6 @@ wliu_table.directive("table.wait", function (wliuTableService) {
         restrict: "E",
         replace: true,
         scope: {
-            table:      "=",
             targetid:   "@",
             maskable:   "@"
         },
@@ -3346,7 +3344,6 @@ wliu_table.directive("table.autotip", function (wliuTableService) {
         restrict: "E",
         replace: true,
         scope: {
-            table:      "=",
             targetid:   "@",
             halign:     "@",
             valign:     "@",

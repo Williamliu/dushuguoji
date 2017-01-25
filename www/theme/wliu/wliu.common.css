@@ -16,12 +16,16 @@ table td, table th,
 
 .btn {
 	margin: 		0px;
-	padding: 		3px 12px;
+	padding: 		6px 12px;
 	line-height: 	20px;
 	box-sizing:     content-box;
 	border-radius:  5px;
+	text-shadow:		1px 1px #000000; 
 }
 
+.btn-row {
+	padding: 		3px 12px;
+}
 .checkbox label, .radio label {
     cursor: 		pointer;
     font-weight: 	400;
@@ -231,16 +235,39 @@ abbr {
 	text-decoration: underline;
 }
 
+.wliuCommon-header {
+	display: 		inline-block;
+	position: 		relative;
+	padding: 		0px;
+	font-size: 		0.9em;
+	font-weight: 	400;
+	margin: 		5px;
+	white-space:    nowrap;
+	overflow: 		hidden;
+	vertical-align: middle;
+}
+
+
 .wliuCommon-label {
 	display: 		inline-block;
 	position: 		relative;
 	padding: 		0px;
-	margin: 		0px;
 	font-size: 		0.9em;
 	font-weight: 	400;
-	margin: 		2px;
-	white-space:    nowrap;
-	overflow: 		hidden;
+	margin: 		5px;
+	vertical-align: middle;
+}
+
+.wliuCommon-tips:before {
+	content:"* ";
+}
+.wliuCommon-tips {
+	display: 		inline-block;
+	position: 		relative;
+	padding: 		0px;
+	font-size: 		0.9em;
+	font-style:     italic;
+	font-weight: 	400;
 	vertical-align: middle;
 }
 
