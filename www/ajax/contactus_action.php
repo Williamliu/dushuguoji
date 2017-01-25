@@ -4,7 +4,7 @@ ini_set("display_errors", 0);
 include_once("../../include/config/config.php");
 include_once($CFG["include_path"] . "/wliu/database/database.php");
 include_once($CFG["include_path"] . "/wliu/email/email.php");
-define("DEBUG", 0);
+define("DEBUG", 1);
 $response = array();
 try {
 	$rights = array("view"=>1, "save"=>1, "add"=>1, "delete"=>1);

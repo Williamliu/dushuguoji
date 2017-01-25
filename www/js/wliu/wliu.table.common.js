@@ -1213,7 +1213,7 @@ WLIU.TABLEACTION.prototype = {
 		//ntable.filters = this.getFilters();
 		ntable.lists = this.getLists(theTable);
 		ntable.rows = FROW.getChangeRow(theRow);
-
+		console.log( ntable.rows );
 		if(callback) {
 			this.callback.before = callback.before && $.isFunction(callback.before)?callback.before:undefined;
 			this.callback.after = callback.after && $.isFunction(callback.after)?callback.after:undefined;

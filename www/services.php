@@ -149,8 +149,8 @@
 
 
 	var student_table = new WLIU.FORM({
-		scope: 	"contactus",
-		url:   	"ajax/service_action.php",
+		scope: 	"student_form",
+		url:   	"ajax/services_action.php",
 		
 		wait:   	"#wmwait",
 		tips: 		"#wmtips",
@@ -678,8 +678,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<center>
-				<form.linkbutton form="student_form" rowsn="0" name="save" outline="1" actname="提交表格"></form.linkbutton>
-				<form.linkbutton form="student_form" rowsn="0" name="cancel" outline="1" actname="清除重填"></form.linkbutton>
+				<form.linkbutton form="student_form" rowsn="0" name="save"  	actname="提交表格"></form.linkbutton>
+				<form.linkbutton form="student_form" rowsn="0" name="cancel" 	actname="清除重填"></form.linkbutton>
 			</center>
 		</div>
 	</div>
