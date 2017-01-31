@@ -99,10 +99,10 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 	</div>
 </div>
 
-<form.tooltip targetid="wmtips"></form.tooltip>
+<div id="wmtips" wliu-popup></div>
+<div id="wmwait" wliu-load maskable><div wliu-load-text>请稍等...</div></div>
+<div id="wmautotip" wliu-tips></div>
 <form.rowerror form="form" rowsn="0" targetid="taberror" maskable=0></form.rowerror>
-<form.wait targetid="wmwait"></form.wait>
-<form.autotip targetid="wmautotip"></form.autotip>
 </div>
 
 

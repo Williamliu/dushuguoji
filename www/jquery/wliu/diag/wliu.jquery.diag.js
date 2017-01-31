@@ -8,40 +8,37 @@ $.fn.extend({
             left:       0,
             height:     0,
             width:      0,
-            border:     false,
             title:      "",
             titleAlign: "center",
             titleColor: "#33b5e5",
 
-            maskable: 	true,
+            maskable: 	false,
             movable:    false,
-            fade:       true,
+            border:     false,
+            fade:       false,
             
-            zIndex: 	8000,
-			before:		null,
-			after:		null,
-            close:      null
+            zIndex: 	8000
         };
         $.extend(def_settings, opts);
 
-        var mask_ifrm   = "#wliuDiag_mask_ifrm";
-        var mask_div    = "#wliuDiag_mask_div";
+        var mask_ifrm   = "iframe[wliu-diag-mask]";
+        var mask_div    = "div[wliu-diag-mask]";
         var midx = parseInt(def_settings.zIndex);
 
         if( $(mask_ifrm).length <= 0 ) {
-           $("body").append('<iframe id="wliuDiag_mask_ifrm" class="wliuDiag-mask-ifrm" style="z-index:' + (midx + 1000 - 2) + ';"></iframe>');
+           $("body").append('<iframe wliu-diag-mask style="z-index:' + (midx + 1000 - 2) + ';"></iframe>');
         }
         if( $(mask_div).length <= 0 ) {
-           $("body").append('<div id="wliuDiag_mask_div" class="wliuDiag-mask-div" style="z-index:' + (midx + 1000 - 1) + ';"></div>');
+           $("body").append('<div wliu-diag-mask style="z-index:' + (midx + 1000 - 1) + ';"></div>');
            $(mask_div).unbind("click").bind("click", function(evt){
            
-                    if( $(".wliu-diag:visible").length <=0 ) {
+                    if( $("*[wliu-diag]:visible").length <=0 ) {
                         $(mask_ifrm).hide();
                         $(mask_div).hide();
                     } else {
                         var max = 0;
                         var maxObj = null;
-                        $(".wliu-diag:visible").filter( function(idx){
+                        $("*[wliu-diag]:visible").filter( function(idx){
                             if( parseInt( $(this).css("z-index") ) >= max )  {
                                 max = parseInt( $(this).css("z-index") );
                                 maxObj = $(this)[0];
@@ -54,33 +51,40 @@ $.fn.extend({
 
         /*** begin return ***/
         return this.each(function (idx, el) {
-            if( !$(el).hasClass("wliu-diag") ) $(el).addClass("wliu-diag");
+            if( !$(el).hasAttr("wliu-diag") ) $(el).addAttr("wliu-diag");
             $(el).data("default_settings", def_settings);
             $(el).data("order", midx);
-            $(el).data("maskable", def_settings.maskable?1:0);
-            $(el).data("movable", def_settings.movable?1:0);
-            $(el).data("park", 0);
+            if(def_settings.maskable) $(el).addAttr("maskable",1);
+            if(def_settings.movable) $(el).addAttr("movable",1);
+            if(def_settings.border) $(el).addAttr("border",1);
+            if(def_settings.fade) $(el).addAttr("fade",1);
+            
+            //$(el).data("maskable", def_settings.maskable?1:0);
+            //$(el).data("movable", def_settings.movable?1:0);
+            //$(el).data("maskable", def_settings.maskable?1:0);
+            //$(el).data("movable", def_settings.movable?1:0);
+            $(el).removeAttr("park");
             $(el).data("parkTop", 0);
             $(el).data("parkLeft", 0);
             
             // css style title, content border ,close icon
-            if(def_settings.border) $("div.wliu-diag-content", el).css("border-width", "1px");
-            if(def_settings.width > 0) $("div.wliu-diag-content", el).css("width", def_settings.width);
-            if(def_settings.height > 0) $("div.wliu-diag-content", el).css("height", def_settings.height);
+            if( $(el).hasAttr("border") ) $("div[wliu-diag-body]", el).css("border-width", "1px");
+            if(def_settings.width > 0) $("div[wliu-diag-body]", el).css("width", def_settings.width);
+            if(def_settings.height > 0) $("div[wliu-diag-body]", el).css("height", def_settings.height);
             if(def_settings.top > 0) $(el).css("top", def_settings.top);
             if(def_settings.left > 0) $(el).css("left", def_settings.left);
 
             if( $(el).has("a.wliu-btn16-close").length<=0 ) $(el).prepend('<a class="wliu-btn16 wliu-btn16-close"></a>');
             
             if(def_settings.title!="") {
-                if( $(el).has("div.wliu-diag-title").length<=0 ) $(el).prepend('<div class="wliu-diag-title"></title>');
-                $("div.wliu-diag-title", el).html(def_settings.title);
+                if( $(el).has("div[wliu-diag-head]").length<=0 ) $(el).prepend('<div wliu-diag-head"></div>');
+                $("div[wliu-diag-head]", el).html(def_settings.title);
                 $(el).attr("title", "");
             }
-            if($("div.wliu-diag-title", el).length > 0) {
-                if(def_settings.titleAlign!="") $("div.wliu-diag-title", el).css("text-align", def_settings.titleAlign);
-                if(def_settings.titleColor!="") $("div.wliu-diag-title", el).css("background-color", def_settings.titleColor);
-                if(def_settings.width > 0) $("div.wliu-diag-title", el).css("width", def_settings.width);
+            if($("div[wliu-diag-head]", el).length > 0) {
+                if(def_settings.titleAlign!="") $("div[wliu-diag-head]", el).css("text-align", def_settings.titleAlign);
+                if(def_settings.titleColor!="") $("div[wliu-diag-head]", el).css("background-color", def_settings.titleColor);
+                if(def_settings.width > 0) $("div[wliu-diag-head]", el).css("width", def_settings.width);
                 $("a.wliu-btn16-close", el).addClass("wliu-diag-title-close");
             }
 
@@ -95,19 +99,19 @@ $.fn.extend({
 
 
             // deal with movable
-            if (def_settings.movable) {
-                if( $(el).has("div.wliu-diag-title").length<=0 ) {
-                    $(el).prepend('<div class="wliu-diag-title"></title>');
+            if ( $(el).hasAttr("movable") ) {
+                if( $(el).has("div[wliu-diag-head]").length<=0 ) {
+                    $(el).prepend('<div wliu-diag-head"></div>');
                     $("a.wliu-btn16-close", el).addClass("wliu-diag-title-close");
                 }
-                $("div.wliu-diag-title", el).css("cursor", "move");
+                $("div[wliu-diag-head]", el).css("cursor", "move");
                 
                 $(el).draggable({
-                    handle: $("div.wliu-diag-title", el),
+                    handle: $("div[wliu-diag-head]", el),
                     start: function () {
                     },
                     stop: function () {
-                        $(el).data("park", 1);  
+                        $(el).addAttr("park", 1);  
 
                         // update first, then recaculate 
                         $(el).data("parkTop", $(el).offset().top);
@@ -155,8 +159,8 @@ $.fn.extend({
             $(el).unbind("hide").bind("hide", function (evt) {
                 var def_settings = $(el).data("default_settings");
                 $(this).css("z-index", $(this).data("order")).fadeOut(0, function() {  // don't fade out,  hide immediately to prevent show again
-
-                    if( $(".wliu-diag:visible[maskable='1']").length<=0 ) {
+                    // if no maskable diag , mask should be close
+                    if( $("*[wliu-diag][maskable]:visible").length<=0 ) {
                         $(mask_ifrm).hide();
                         $(mask_div).hide();
                     }
@@ -164,7 +168,7 @@ $.fn.extend({
                     // move secondary to top
                     var max = 0;
                     var maxObj = null;
-                    $(".wliu-diag:visible").filter( function(idx){
+                    $("*[wliu-diag]:visible").filter( function(idx){
                         $(this).css("z-index", parseInt($(this).css("z-index")) + 1);
                         if( parseInt( $(this).css("z-index") ) >= max )  {
                             max = parseInt( $(this).css("z-index") );
@@ -174,8 +178,8 @@ $.fn.extend({
                    
                     $(maxObj).css("z-index", midx + 1000);
                     
-                    $(maxObj).fadeIn((def_settings.fade?"slow":0), function(){
-                        if( $(maxObj).data("maskable") == "1" ) {
+                    $(maxObj).fadeIn(($(el).hasAttr("fade")?"slow":0), function(){
+                        if( $(maxObj).hasAttr("maskable") ) {
                             $(mask_ifrm).show();
                             $(mask_div).show();
                         } else {
@@ -183,8 +187,8 @@ $.fn.extend({
                             $(mask_div).hide();
                         }
                     });
-                    
-                    if( def_settings.close ) if( $.isFunction(def_settings.close) ) def_settings.close(el);
+
+                    eval( $(el).attr("after") );
                 });
             });
 
@@ -193,7 +197,7 @@ $.fn.extend({
     			if( def_settings.before ) if( $.isFunction(def_settings.before) ) def_settings.before(el);
                 
                 // layout order, push other layout under mask div
-                $(".wliu-diag:visible").not(el).each( function(idx1, el1){
+                $("*[wliu-diag]:visible").not(el).each( function(idx1, el1){
                     if( parseInt( $(el1).css("z-index") ) >= (midx + 1000) )  {
                         $(el1).css("z-index", (midx + 1000) - 3 ); // -1 = mask div, -2 = mask iframe
                     } else {
@@ -204,7 +208,7 @@ $.fn.extend({
                 $(el).css("z-index", midx + 1000);
                 // offset().top available for visible element , otherwise 0 
                 // re-position the dialog
-                if( $(el).data("park")==1 ) {
+                if( $(el).hasAttr("park") ) {
                     
                     //if out of range ,  still need to relocation
                     if( 
@@ -256,18 +260,19 @@ $.fn.extend({
                     // end of position
                 }
                // end of re-position
-
-                $(this).fadeIn((def_settings.fade?"slow":0), function(){
-                   if( $(this).data("maskable") == 1 ) {
+               
+               if( !$(el).is(":visible") ) eval( $(el).attr("before") );
+               
+               $(el).fadeIn(( $(el).hasAttr("fade")?"slow":0), function(){
+                   if( $(this).hasAttr("maskable") ) {
                         $(mask_ifrm).show();
                         $(mask_div).show();
-            			if( def_settings.after ) if( $.isFunction(def_settings.after) ) def_settings.after(el);
                    }
                 });
             });
 
             $(el).unbind("title").bind("title", function (evt, title) {
-                 $(".wliu-diag-title", el).html(title);
+                 $("*[wliu-diag-head]", el).html(title);
             });
            /*** end of bind event to dom ***/
 
@@ -278,21 +283,23 @@ $.fn.extend({
 
 
 $(function(){
-    $(document).off("click", "*[wliu-diag][diag-toggle='click']").on("click", "*[wliu-diag][diag-toggle='click']", function(evt){
+    $("div[wliu-diag]").wliuDiag({});
+
+    $(document).off("click", "*[diag-toggle='click']").on("click", "*[diag-toggle='click']", function(evt){
         //if( $( $(this).attr("wliu-target") ).is(":hidden")  ) {
             $( $(this).attr("diag-target") ).trigger("show");
         //} else {
         //    $( $(this).attr("wliu-target") ).trigger("hide");
         //}
     });
-    $(document).off("mouseover", "*[wliu-diag][diag-toggle='hover']").on("mouseover", "*[wliu-diag][diag-toggle='hover']", function(evt){
+    $(document).off("mouseover", "*[diag-toggle='hover']").on("mouseover", "*[diag-toggle='hover']", function(evt){
         $( $(this).attr("diag-target") ).trigger("show");
     });
 
     $(window).unbind("resize.wliuDiag").bind("resize.wliuDiag", function () {
-        $(".wliu-diag:visible").each( function(idx, el) {
+        $("div[wliu-diag]:visible").each( function(idx, el) {
                 var def_settings = $(this).data("default_settings");
-                if($(this).data("park")=="1") {
+                if( $(this).hasAttr("park") ) {
                     //if out of range ,  still need to relocation
                     if( 
                         $(this).data("parkTop") + $(this).outerHeight() >= $(window).scrollTop() + $(window).height() || 

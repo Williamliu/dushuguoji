@@ -8,57 +8,57 @@
 
 <script language="javascript" type="text/javascript">
 	var col0 = new WLIU.COL({key:1, coltype:"hidden", 		name:"id", 				colname:"ID" });
-	var col1 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_name", 	colname:"Name of School 学校名称 (英文)" });
-	var col2 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_address", 	colname:"Address of School 学校地址 (英文)" });
+	var col1 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_name", 	maxlength:128,	colname:"Name of School 学校名称 (英文)", need: 1 });
+	var col2 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_address", 	maxlength:128,	colname:"Address of School 学校地址 (英文)" });
 	var col3 = new WLIU.COL({key:0, coltype:"checkbox", 	name:"ck_service", 		colname:"Please check off services you require 请在以下所需项目上钩选", list: "mservice" });
 	var col4 = new WLIU.COL({key:0, coltype:"radio", 		name:"rd_service", 		colname:"4. Dedicated Student Support Package for School, Homestay and Career 家长放心服务包", list: "sservice" });
-	var col5 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_fname",	colname:"First Name 名", need:1,  notnull:1});
-	var col6 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_lname",	colname:"Subname 姓",	need:1,  notnull:1});
-	var col7 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_oname", 	colname:"Other Name 其他名字" });
-	var col8 = new WLIU.COL({key:0, coltype:"textbox", 		name:"passport", 	colname:"Passport No. 护照号", need:1,  notnull:1});
-	var col9 = new WLIU.COL({key:0, coltype:"textbox", 		name:"en_score", 	colname:"英语成绩"});
-	var col10 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_address",	colname:"Home Address 家庭住址"});
-	var col11 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_state", 	colname:"Province/Territory 省"});
-	var col12 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_city", 	colname:"City/Town 城市"});
-	var col13 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_postal", 	colname:"Postal Code 邮编"});
-	var col14 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_email", 	colname:"E-mail 电子邮件", need:1, notnull:1, datatype:"email"});
-	var col15 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_phone", 	colname:"Phone 电话"});
-	var col16 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_wechat", 	colname:"WeChat 微信"});
-	var col17 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_fname",	colname:"Father's Name 父亲姓名", need:1,  notnull:1});
-	var col18 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_email", 	colname:"E-mail 父亲邮件", need:0, notnull:0, datatype:"email"});
-	var col19 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_phone", 	colname:"Phone 父亲电话"});
-	var col20 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_wechat", 	colname:"WeChat 父亲微信"});
-	var col21 = new WLIU.COL({key:0, coltype:"date", 		name:"dad_birth", 	colname:"BirthDate 父亲生日", need:0, notnull:0});
+	var col5 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_fname",		maxlength:64,	colname:"First Name 名", need:1,  notnull:1});
+	var col6 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_lname",		maxlength:64,	colname:"Subname 姓",	need:1,  notnull:1});
+	var col7 = new WLIU.COL({key:0, coltype:"textbox", 		name:"stu_oname", 		maxlength:64,	colname:"Other Name 其他名字" });
+	var col8 = new WLIU.COL({key:0, coltype:"textbox", 		name:"passport", 		maxlength:32,	colname:"Passport No. 护照号", need:1,  notnull:1});
+	var col9 = new WLIU.COL({key:0, coltype:"textbox", 		name:"en_score", 		maxlength:128,	colname:"英语成绩"});
+	var col10 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_address",		maxlength:128,	colname:"Home Address 家庭住址"});
+	var col11 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_state", 		maxlength:128,	colname:"Province/Territory 省"});
+	var col12 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_city", 		maxlength:128,	colname:"City/Town 城市"});
+	var col13 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_postal", 		maxlength:16,	colname:"Postal Code 邮编"});
+	var col14 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_email", 		maxlength:128,	colname:"E-mail 电子邮件", need:1, notnull:1, datatype:"email"});
+	var col15 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_phone", 		maxlength:32,	colname:"Phone 电话", need: 1 });
+	var col16 = new WLIU.COL({key:0, coltype:"textbox", 	name:"stu_wechat", 		maxlength:32,	colname:"WeChat 微信"});
+	var col17 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_fname",		maxlength:64,	colname:"Father's Name 父亲姓名", need:1,  notnull:1});
+	var col18 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_email", 		maxlength:128,	colname:"E-mail 父亲邮件", need:0, notnull:0, datatype:"email"});
+	var col19 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_phone", 		maxlength:32,	colname:"Phone 父亲电话"});
+	var col20 = new WLIU.COL({key:0, coltype:"textbox", 	name:"dad_wechat", 		maxlength:32,	colname:"WeChat 父亲微信"});
+	var col21 = new WLIU.COL({key:0, coltype:"date", 		name:"dad_birth", 		colname:"BirthDate 父亲生日", need:0, notnull:0});
 
-	var col22 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_fname",	colname:"Mother's Name 母亲姓名", need:1,  notnull:1});
-	var col23 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_email", 	colname:"E-mail 母亲邮件", need:0, notnull:0, datatype:"email"});
-	var col24 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_phone", 	colname:"Phone 母亲电话"});
-	var col25 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_wechat", 	colname:"WeChat 母亲微信"});
-	var col26 = new WLIU.COL({key:0, coltype:"date", 		name:"mom_birth", 	colname:"BirthDate 母亲生日", need:0, notnull:0});
+	var col22 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_fname",		maxlength:64,	colname:"Mother's Name 母亲姓名", need:1,  notnull:1});
+	var col23 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_email", 		maxlength:128,	colname:"E-mail 母亲邮件", need:0, notnull:0, datatype:"email"});
+	var col24 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_phone", 		maxlength:32,	colname:"Phone 母亲电话"});
+	var col25 = new WLIU.COL({key:0, coltype:"textbox", 	name:"mom_wechat", 		maxlength:32,	colname:"WeChat 母亲微信"});
+	var col26 = new WLIU.COL({key:0, coltype:"date", 		name:"mom_birth", 		colname:"BirthDate 母亲生日", need:0, notnull:0});
 
-	var col27 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_address",	colname:"Home Address 父母住址", need:0,  notnull:0});
-	var col28 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_state", 	colname:"Province/Territory 省"});
-	var col29 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_city", 	colname:"City/Town 城市"});
-	var col30 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_postal", 	colname:"Postal Code 邮编"});
-	var col31 = new WLIU.COL({key:0, coltype:"textbox", 	name:"airline", 	colname:"Airline 航空公司"});
-	var col32 = new WLIU.COL({key:0, coltype:"textbox", 	name:"flight", 		colname:"Flight No. 航班"});
+	var col27 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_address",		maxlength:128,	colname:"Home Address 父母住址", need:0,  notnull:0});
+	var col28 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_state", 		maxlength:128,	colname:"Province/Territory 省"});
+	var col29 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_city", 		maxlength:128,	colname:"City/Town 城市"});
+	var col30 = new WLIU.COL({key:0, coltype:"textbox", 	name:"par_postal", 		maxlength:16,	colname:"Postal Code 邮编"});
+	var col31 = new WLIU.COL({key:0, coltype:"textbox", 	name:"airline", 		maxlength:32,	colname:"Airline 航空公司"});
+	var col32 = new WLIU.COL({key:0, coltype:"textbox", 	name:"flight", 			maxlength:32,	colname:"Flight No. 航班"});
 	var col33 = new WLIU.COL({key:0, coltype:"datetime", 	name:"pickup_datetime", colname:"Arrival Time 抵达时间"});
-	var col34 = new WLIU.COL({key:0, coltype:"textbox", 	name:"destination", colname:"Please provide destination address if known. 如果已知目的地，请填写地址"});
+	var col34 = new WLIU.COL({key:0, coltype:"textbox", 	name:"destination", 	maxlength:128,	colname:"Please provide destination address if known. 如果已知目的地，请填写地址"});
 	var col35 = new WLIU.COL({key:0, coltype:"date", 		name:"homestay_start", 	colname:"Starting Date 开始居住日期"});
 	var col36 = new WLIU.COL({key:0, coltype:"date", 		name:"homestay_end", 	colname:"Ending of Date 结束居住日期"});
-	var col37 = new WLIU.COL({key:0, coltype:"textbox", 	name:"health_medicine", 	colname:"请填写任何被诊断出而且需长期服药的疾病，包括但不限于干涉到生理，心理，精神问题。请填写长期服用的有关药名和服用量。如有过敏史，包括食物，药品，粉尘等，请务必说明"});
-	var col38 = new WLIU.COL({key:0, coltype:"textbox", 	name:"health_horby", 	colname:"请填写任何学习和社交障碍以及生活习惯，行举异常的状况，这包括但不限于睡眠，吸烟，饮酒等"});
-	var col39 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_character", 	colname:"简单描述你的性格，如外向，乐观，安静等"});
-	var col40 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_horby", 	colname:"你的兴趣爱好"});
-	var col41 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_sport", 	colname:"喜欢的运动"});
-	var col42 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_music", 	colname:"擅长演奏的乐器"});
-	var col43 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_food", 	colname:"喜欢的食物"});
-	var col44 = new WLIU.COL({key:0, coltype:"bool", 		name:"per_vegit", 	colname:"是否吃素"});
+	var col37 = new WLIU.COL({key:0, coltype:"textbox", 	name:"health_medicine", maxlength:256,	colname:"请填写任何被诊断出而且需长期服药的疾病，包括但不限于干涉到生理，心理，精神问题。请填写长期服用的有关药名和服用量。如有过敏史，包括食物，药品，粉尘等，请务必说明"});
+	var col38 = new WLIU.COL({key:0, coltype:"textbox", 	name:"health_horby", 	maxlength:256,	colname:"请填写任何学习和社交障碍以及生活习惯，行举异常的状况，这包括但不限于睡眠，吸烟，饮酒等"});
+	var col39 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_character", 	maxlength:256,	colname:"简单描述你的性格，如外向，乐观，安静等"});
+	var col40 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_horby", 		maxlength:256,	colname:"你的兴趣爱好"});
+	var col41 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_sport", 		maxlength:256,	colname:"喜欢的运动"});
+	var col42 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_music", 		maxlength:256,	colname:"擅长演奏的乐器"});
+	var col43 = new WLIU.COL({key:0, coltype:"textbox", 	name:"per_food", 		maxlength:256,	colname:"喜欢的食物"});
+	var col44 = new WLIU.COL({key:0, coltype:"bool", 		name:"per_vegit", 		maxlength:256,	colname:"是否吃素"});
 	var col45 = new WLIU.COL({key:0, coltype:"checkbox", 	name:"homestay_child", 	colname:"寄宿家庭成员", list:"homestay_child"});
 	var col46 = new WLIU.COL({key:0, coltype:"radio", 		name:"homestay_envir", 	colname:"寄宿家庭环境", list:"homestay_envir"});
-	var col47 = new WLIU.COL({key:0, coltype:"textbox", 	name:"homestay_other", 	colname:"其它特别要求"});
-	var col48 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_letter", colname:"(简单的介绍自己， 以及为什么选择到加拿大留学，需用英文写)"});
-	var col49 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_concern",colname:"Parental Concerns 学生家长关心的问题 (请家长填写)"});
+	var col47 = new WLIU.COL({key:0, coltype:"textbox", 	name:"homestay_other", 	maxlength:256,	colname:"其它特别要求"});
+	var col48 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_letter", maxlength:1024,	colname:"(简单的介绍自己， 以及为什么选择到加拿大留学，需用英文写)"});
+	var col49 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_concern",maxlength:1024,	colname:"Parental Concerns 学生家长关心的问题 (请家长填写)"});
 
 	var cols = [];
 	cols.push(col0);
@@ -164,6 +164,7 @@
 	app.controller("dsgj_studentform", function ($scope) {
 		student_table.setScope( $scope, "student_form" );
 		student_table.addRecord();
+		//student_table.getRecord({id:2});
 
 		$scope.totalAmt = function() {
 			var total = 0;
@@ -194,6 +195,16 @@
 			</center>
 		</div>
 	</div>
+
+	<ul wliu-tab9 color-awesome>
+		<li>选择精品境外服务</li>
+	</ul>
+	<br>
+	<div class="row">
+		<div class="col-md-12">
+			<span style="font-size:16px; border-bottom:2px solid #FE2354;">School Information 录取学校信息</span>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-3 text-nowrap">
 				<form.label form="student_form" name="school_name"></form.label>
@@ -218,7 +229,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12 text-nowrap">
-			<form.label form="student_form" name="ck_service" style="text-decoration:underline; font-size:16px;"></form.label>
+			<form.label form="student_form" name="ck_service" style="font-size:16px; border-bottom:2px solid #FE2354;"></form.label>
 		</div>
 	</div>
 	<div class="row">
@@ -245,15 +256,14 @@
 		</div>
 	</div>
 	<br>
+
+	<ul wliu-tab9 color-mint>
+		<li>A. Personal Profile 个人资料</li>
+	</ul>
+	<br>
 	<div class="row">
 		<div class="col-md-12">
-			A. Personal Profile个人资料 	
-			<hr>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			Legal Information 个人信息 	
+			<span style="font-size:16px; border-bottom:2px solid #41B48A;">Legal Information 个人信息</span>
 		</div>
 	</div>
 	<div class="row">
@@ -298,7 +308,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Student Contact Information 学生联络信息 
+			<span style="font-size:16px; border-bottom:2px solid #41B48A;">Student Contact Information 学生联络信息</span>
 		</div>
 	</div>
 	<div class="row">
@@ -352,7 +362,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Parent Contact Information 家长联络信息 
+			<span style="font-size:16px; border-bottom:2px solid #41B48A;">Parent Contact Information 家长联络信息</span>
 		</div>
 	</div>
 	<div class="row">
@@ -460,12 +470,12 @@
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="col-md-12">
-			B. Airport Pick-up接机服务 
-			<hr>
-		</div>
-	</div>
+
+	<ul wliu-tab9 color-orange>
+		<li>B. Airport Pick-up 接机服务</li>
+	</ul>
+	<br>
+
 	<div class="row">
 		<div class="col-md-12">
 			<span class="wliuCommon-tips">如果选择了接机服务，请填写本表</span><br>
@@ -503,12 +513,11 @@
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="col-md-12">
-			C. Homestay申请寄宿家庭 
-			<hr>
-		</div>
-	</div>
+
+	<ul wliu-tab9 color-purple>
+		<li>C. Homestay 申请寄宿家庭</li>
+	</ul>
+	<br>
 	<div class="row">
 		<div class="col-md-12">
 			<span class="wliuCommon-tips">如果选择了寄宿家庭服务，请填写本表</span><br>
@@ -516,9 +525,10 @@
 			<span class="wliuCommon-tips">请准确填写以下内容。这些信息非常重要，能够帮助我们在紧急情况下快速的协助医生诊断，同时帮助我们为你安排适当的寄宿家庭</span>
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-12 text-nowrap">
-			<span style="text-decoration:underline; font-size:16px;">我们安排的寄宿家庭将符合以下标准 </span><br>
+			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">我们安排的寄宿家庭将符合以下标准</span><br>
 			<span style="font-size:14px;margin-left:20px;">1. 学生将有自己单独的卧室，带全部家具，包括床和被褥枕头，衣橱，书桌椅</span><br>
 			<span style="font-size:14px;margin-left:20px;">2. 房间有暖气，通风和良好的采光</span><br>
 			<span style="font-size:14px;margin-left:20px;">3. 卫生间含淋浴</span><br>
@@ -535,7 +545,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Personal Health 个人健康  
+			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">Personal Health 个人健康</span>
 		</div>
 	</div>
 	<div class="row">
@@ -562,7 +572,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Describe yourself 个人性格 	 			
+			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">Describe yourself 个人性格</span>
 		</div>
 	</div>
 	<div class="row">
@@ -610,7 +620,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Your requirement for homestay对寄宿家庭的期望
+			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">Your requirement for homestay对寄宿家庭的期望</span>
 		</div>
 	</div>
 	<div class="row">
@@ -663,10 +673,13 @@
 		</div>
 	</div>
 	<br>
+
+	<ul wliu-tab9 color-green>
+		<li>D. Refund Policy 退款政策</li>
+	</ul>
+	<br>
 	<div class="row">
 		<div class="col-md-12">
-			<span style="text-decoration:underline; font-size:16px;">D. Refund Policy退款政策</span>
-			<hr>
 			<span style="font-size:14px;margin-left:20px;">1. 须书面提出</span><br>
 			<span style="font-size:14px;margin-left:20px;">2. 须提供使馆拒签信</span><br>
 			<span style="font-size:14px;margin-left:20px;">3. 寄宿家庭安置费和法律监护律师公证费不退</span><br>

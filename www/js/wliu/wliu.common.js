@@ -20,7 +20,7 @@ String.prototype.br2nl = function() {
 	return str;
 }
 String.prototype.trim = function() {
-	return this.replace(/^\s+(.*)\s+$/gi,"$1");
+	return this.replace(/^\s+|\s+$/g, '');
 }
 String.prototype.replaceAll = function(s1, s2) {
 	return this.replace(new RegExp(s1, "gm"), s2);
@@ -53,15 +53,17 @@ String.prototype.toBlob = function(mime) {
 
 /*** File Name ***/
 String.prototype.fileName = function() {
+	return this.toString().replace(/.*(\/|\\)/, "");
+}
+String.prototype.shortName = function() {
 	var name = this.toString().replace(/.*(\/|\\)/, "");
 	return name.substr(0,name.lastIndexOf("."));
 }
-
 String.prototype.extName = function() {
 	return (this.toString().indexOf('.') !== -1)?this.toString().replace(/.*[.]/, '').toLowerCase() :'';
 }
 
-String.prototype.shortName = function(n) {
+String.prototype.subName = function(n) {
 	n = n || 10;
 	var name = this.toString().fileName();
 	if (name.length > n){
@@ -69,14 +71,7 @@ String.prototype.shortName = function(n) {
 	}
 	return name;
 }
-String.prototype.fullName = function(n) {
-	n = n || 13;
-	var name = this.toString().replace(/.*(\/|\\)/, "");
-	if( name.length > n ) {
-		name = name.slice(0, n - 8) + '...' + name.slice(-8);    
-	} 
-	return name;
-}
+
 Number.prototype.toSize = function() {
 		if( isNaN(this) || parseFloat(this) <= 0  ) {
 			return "";
@@ -90,10 +85,61 @@ Number.prototype.toSize = function() {
 			} while (bytes > 999);
 			/* end of main function here */
 
-			return Math.max(bytes, 1).toFixed(0) + ['KB', 'MB', 'GB', 'TB', 'PB', 'EB'][i];          
+			return Math.max(bytes, 1).toFixed(1) + ['KB', 'MB', 'GB', 'TB', 'PB', 'EB'][i];          
 		}
 }
 /*****************************/
+
+$.fn.extend({
+    hasAttr: function(attrs) {
+		if(!attrs || attrs.trim()=="") return false; 
+        var flag = true; 
+        this.each(function(idx, el){
+			var attrArr  = [];
+			attrArr.push(attrs);
+            var seperate = "";
+
+            if( attrs.indexOf(" ")>=0 ) {
+                attrArr = attrs.split(" ");
+                seperate = "";
+            }
+            if( attrs.indexOf(",")>=0 ) {
+                attrArr = attrs.split(",");
+                seperate = ",";
+            }
+
+            var attrStr = "";
+            for(var idx in attrArr) {
+                if( attrArr[idx].trim()!="" ) {
+                    var temp1 = attrArr[idx].trim();
+                    var attrName = "";
+                    if( temp1.indexOf(" ")>=0 ) {
+                        temp2 = temp1.split(" ");
+                        for(var idx2 in temp2) {
+                            var temp3 = temp2[idx2].trim();
+                            attrName += "[" + temp3 + "]";
+                        }
+                    } else {
+                        attrName = "[" + attrArr[idx].trim() + "]";
+                    }
+                    attrStr += (attrStr?seperate:"") + attrName;
+                }
+            }
+            if(attrStr=="") attrStr="*";
+            if( $(el).filter(attrStr).length<=0 ) flag = false;
+        });
+        return flag;
+    },
+	addAttr: function(attrName, attrVal) {
+       	return this.each(function(idx, el){
+			if( attrVal ) 
+				$(el).attr(attrName, attrVal)
+			else 
+				$(el).attr(attrName, "")
+        });
+	}
+})
+
 
 /*
 Array.prototype.first = function() {

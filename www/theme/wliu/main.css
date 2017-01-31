@@ -141,6 +141,7 @@ div#publicWebsite_contactus a.contact_qq {
 
 div#publicWebsite_contactus span.contact_text {
 	color:				#666666; 			
+	text-shadow:		1px 1px #ffffff; 
 	font-size:			24px;
 	vertical-align:		middle;
 	margin-left:		20px;
