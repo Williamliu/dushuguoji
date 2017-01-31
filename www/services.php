@@ -222,23 +222,23 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 text-nowrap">
+		<div class="col-md-12">
 			<span class="wliuCommon-tips">请提供录取函影印件</span>
 		</div>
 	</div>
 	<br>
 	<div class="row">
-		<div class="col-md-12 text-nowrap">
+		<div class="col-md-12">
 			<form.label form="student_form" name="ck_service" style="font-size:16px; border-bottom:2px solid #FE2354;"></form.label>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 text-nowrap">
+		<div class="col-md-12">
 				<form.checkbox form="student_form" name="ck_service" rowsn="0" colnum="1" tooltip="#wmtips"></form.checkbox>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 text-nowrap">
+		<div class="col-md-12">
 			<form.label form="student_form" name="rd_service"></form.label>
 		</div>
 	</div>
@@ -527,7 +527,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-12 text-nowrap">
+		<div class="col-md-12">
 			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">我们安排的寄宿家庭将符合以下标准</span><br>
 			<span style="font-size:14px;margin-left:20px;">1. 学生将有自己单独的卧室，带全部家具，包括床和被褥枕头，衣橱，书桌椅</span><br>
 			<span style="font-size:14px;margin-left:20px;">2. 房间有暖气，通风和良好的采光</span><br>
