@@ -1,25 +1,20 @@
 $.fn.extend({
     wliuPopup: function (opts) {
         var def_settings = {
-            title:          "",
             placement:      ""  // left right up down, 
         };
         $.extend(def_settings, opts);
 
         /*** begin return ***/
         return this.each(function (idx, el) {
-            if( !$(el).hasClass("wliu-popup") ) $(el).addClass("wliu-popup");
-            $(el).data("default_settings", def_settings);
-            if( $(el).has("s.arrow-left").length<=0 ) $(el).prepend('<s class="arrow arrow-left"></s>');
-            if( $(el).has("s.arrow-right").length<=0 ) $(el).prepend('<s class="arrow arrow-right"></s>');
-            if( $(el).has("s.arrow-up").length<=0 ) $(el).prepend('<s class="arrow arrow-up"></s>');
-            if( $(el).has("s.arrow-head-up").length<=0 ) $(el).prepend('<s class="arrow arrow-head-up"></s>');
-            if( $(el).has("s.arrow-down").length<=0 ) $(el).prepend('<s class="arrow arrow-down"></s>');
+            if( !$(el).hasAttr("wliu-popup") ) $(el).addAttr("wliu-popup");
+            if( $(el).has("s[arrow][left]").length<=0 ) $(el).prepend('<s arrow left></s>');
+            if( $(el).has("s[arrow][right]").length<=0 ) $(el).prepend('<s arrow right></s>');
+            if( $(el).has("s[arrow][up]").length<=0 ) $(el).prepend('<s arrow up></s>');
+            if( $(el).has("s[arrow][head-up]").length<=0 ) $(el).prepend('<s arrow head-up></s>');
+            if( $(el).has("s[arrow][down]").length<=0 ) $(el).prepend('<s arrow down></s>');
             
-            if(def_settings.title!="") {
-                if( $(el).has("div.wliu-popup-header").length<=0 ) $(el).prepend('<div class="wliu-popup-header">' + def_settings.title + '</div>');
-            }
-            if( $(el).has("div.wliu-popup-content").length<=0 ) $(el).append('<div class="wliu-popup-content"></div>');
+            if( $(el).has("div[wliu-popup-body]").length<=0 ) $(el).append('<div wliu-popup-body></div>');
         });
         /*** end return ***/
     }
@@ -27,7 +22,7 @@ $.fn.extend({
 
 
 $(function(){
-    $(document).off("click", "*[wliu-popup][popup-toggle='click']").on("click", "*[wliu-popup][popup-toggle='click']", function(evt){
+    $(document).off("click", "*[wliu-role=''][popup-toggle='click']").on("click", "*[wliu-popup][popup-toggle='click']", function(evt){
         var target_el = $(this).attr("popup-target");
         var target_content  = $(this).attr("popup-content");
 

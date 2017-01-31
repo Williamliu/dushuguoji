@@ -40,7 +40,7 @@ div[wliu-popup-active] {
 }
 
 /*** JQuery popup ***/
-div.wliu-popup s.arrow {
+div[wliu-popup] s[arrow] {
     display:            inline-block;
     position:           absolute;
     background-color:   transparent;
@@ -48,7 +48,7 @@ div.wliu-popup s.arrow {
     background-repeat:  no-repeat;
 }
 
-div.wliu-popup s.arrow-left {
+div[wliu-popup] s[arrow][left] {
 	display: 			none;
     width:              12px;
     height:             22px;
@@ -58,7 +58,7 @@ div.wliu-popup s.arrow-left {
     margin-left:        -12px;
     background-position: 0px 0px;
 }
-div.wliu-popup s.arrow-right {
+div[wliu-popup] s[arrow][right] {
 	display: 			none;
     width:              12px;
     height:             22px;
@@ -68,7 +68,7 @@ div.wliu-popup s.arrow-right {
     margin-right:        -12px;
     background-position: -25px 0px;
 }
-div.wliu-popup s.arrow-up {
+div[wliu-popup] s[arrow][up] {
 	display: 			none;
     width:              22px;
     height:             12px;
@@ -78,7 +78,7 @@ div.wliu-popup s.arrow-up {
     margin-left:        -11px;
     background-position: -75px 0px;
 }
-div.wliu-popup s.arrow-head-up {
+div[wliu-popup] s[arrow][head-up] {
 	display: 			none;
     width:              22px;
     height:             12px;
@@ -88,7 +88,7 @@ div.wliu-popup s.arrow-head-up {
     margin-left:        -11px;
     background-position: -100px 0px;
 }
-div.wliu-popup s.arrow-down {
+div[wliu-popup] s[arrow][down] {
 	display: 			none;
     width:              22px;
     height:             12px;
@@ -99,7 +99,7 @@ div.wliu-popup s.arrow-down {
     background-position: -50px 0px;
 }
 
-div.wliu-popup s.arrow-active {
+div[wliu-popup] s[arrow][active] {
 	display: 			inline-block;
 }
 /********************/
