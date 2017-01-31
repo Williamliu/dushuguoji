@@ -31,7 +31,7 @@ div[wliu-popup] div[wliu-popup-body] {
     text-align:         left;
 }
 
-div[wliu-popup-active] {
+div[wliu-popup][active] {
 	display:					inline-block;
 	opacity:					1;
     animation-name:             popupFadein;
@@ -98,6 +98,16 @@ div[wliu-popup] s[arrow][down] {
     margin-left:        -12px;
     background-position: -50px 0px;
 }
+
+
+div[wliu-popup] div[wliu-popup-head] ~ s[arrow][left] {
+    margin-top: 0px;
+}
+div[wliu-popup] div[wliu-popup-head] ~ s[arrow][right] {
+    margin-top: 0px;
+}
+
+
 
 div[wliu-popup] s[arrow][active] {
 	display: 			inline-block;

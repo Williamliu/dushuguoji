@@ -40,8 +40,10 @@
 <link 	href='jquery/wliu/diag/wliu.jquery.diag.css' type='text/css' rel='stylesheet' />
 <script src="jquery/wliu/popup/wliu.jquery.popup.js" type="text/javascript"></script>
 <link 	href='jquery/wliu/popup/wliu.jquery.popup.css' type='text/css' rel='stylesheet' />
-<script src="jquery/wliu/loading/wliu.jquery.loading.js" type="text/javascript"></script>
-<link 	href="jquery/wliu/loading/wliu.jquery.loading.css" type='text/css' rel='stylesheet' />
+<script src="jquery/wliu/load/wliu.jquery.load.js" type="text/javascript"></script>
+<link 	href="jquery/wliu/load/wliu.jquery.load.css" type='text/css' rel='stylesheet' />
+<script src="jquery/wliu/tab/wliu.jquery.tab.js" type="text/javascript"></script>
+<link 	href="jquery/wliu/tab/wliu.jquery.tab.css" type='text/css' rel='stylesheet' />
 
 
 <link href='theme/wliu/wliu.common.css' type='text/css' rel='stylesheet' />

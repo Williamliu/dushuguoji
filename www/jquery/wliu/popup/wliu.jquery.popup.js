@@ -1,7 +1,8 @@
 $.fn.extend({
     wliuPopup: function (opts) {
+        //placement: left right up down;
         var def_settings = {
-            placement:      ""  // left right up down, 
+            //placement:      ""  // left right up down, 
         };
         $.extend(def_settings, opts);
 
@@ -22,66 +23,64 @@ $.fn.extend({
 
 
 $(function(){
-    $(document).off("click", "*[wliu-role=''][popup-toggle='click']").on("click", "*[wliu-popup][popup-toggle='click']", function(evt){
+    $("div[wliu-popup]").wliuPopup({});
+
+    $(document).off("click", "*[popup-toggle='click']").on("click", "*[popup-toggle='click']", function(evt){
         var target_el = $(this).attr("popup-target");
-        var target_content  = $(this).attr("popup-content");
+        var target_content  = $(this).attr("popup-body");
 
         if( $( target_el ).is(":hidden")  ) {
             /********************************************************************************** */
             if(target_content) {
                     var target_pl       = $(this).attr("popup-placement");
-                    var target_tt       = $(this).attr("popup-title");
+                    var target_tt       = $(this).attr("popup-head");
 
-                    var def_settings = $( target_el ).data("default_settings");
-                    target_pl = target_pl?target_pl:def_settings.placement;
-                    target_tt = target_tt?target_tt:def_settings.title;
-                    
                     if( target_tt ) {
-                        if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                            $(target_el).prepend('<div class="wliu-popup-header">' + target_tt + '</div>');
+                        if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                            $(target_el).prepend('<div wliu-popup-head>' + target_tt + '</div>');
                         else 
-                            $( "div.wliu-popup-header", $(target_el) ).html(target_tt);
+                            $( "div[wliu-popup-head]", $(target_el) ).html(target_tt);
                     } else {
-                        $( "div.wliu-popup-header", $(target_el) ).remove();
+                        $( "div[wliu-popup-head]", $(target_el) ).remove();
                     }
 
-                    $( "div.wliu-popup-content", $(target_el) ).html(target_content);
-                    $(target_el).addClass("wliu-popup-active");
+                    $( "div[wliu-popup-body]", $(target_el) ).html(target_content);
+                    $(target_el).addAttr("active");
                     var nleft   = -900;
                     var ntop    = -900;
 
                     switch( ("" + target_pl).toLowerCase() ) {
                         case "left":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][left]", $(target_el)).addAttr("active");
 
                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                             break;
                         case "right":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][right]", $(target_el)).addAttr("active");
                             nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                             break;
                         case "up":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                $("s[arrow][up]", $(target_el)).addAttr("active");
                             else 
-                                $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                $("s[arrow][head-up]", $(target_el)).addAttr("active");
         
                             nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                             ntop = $(this).offset().top + $(this).outerHeight()  + 12;
                             break;
                         case "down":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-down", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][down]", $(target_el)).addAttr("active");
                             nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                             ntop = $(this).offset().top - $(target_el).outerHeight() - 12;
                             break;
                         default:
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
                             var nplace = "left";
                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
@@ -91,22 +90,22 @@ $(function(){
                                     // place to left first, then right
                                     if( cleft <= $(window).width() ) {
                                             nplace = "left";
-                                            $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                                            $("s[arrow][left]", $(target_el)).addAttr("active");
                                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                     } else {
                                             cleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                             if( cleft >= 0 ) {
                                                     nplace = "right";
-                                                    $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                                                    $("s[arrow][right]", $(target_el)).addAttr("active");
                                                     nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                                     ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                             } else { 
                                                     nplace = "up";
-                                                    if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                                        $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                                    if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                                        $("s[arrow][up]", $(target_el)).addAttr("active");
                                                     else 
-                                                        $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                                        $("s[arrow][head-up]", $(target_el)).addAttr("active");
                                 
                                                     nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                                     ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -115,10 +114,10 @@ $(function(){
 
                             } else {
                                     nplace = "up";
-                                    if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                        $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                    if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                        $("s[arrow][up]", $(target_el)).addAttr("active");
                                     else 
-                                        $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                        $("s[arrow][head-up]", $(target_el)).addAttr("active");
                 
                                     nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                     ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -128,78 +127,74 @@ $(function(){
 
                     $(target_el).offset({left:nleft, top:ntop});
             } else {
-                $( "div.wliu-popup-header", $(target_el) ).remove();
-                $( "div.wliu-popup-content", $(target_el) ).empty();
+                $( "div[wliu-popup-head]", $(target_el) ).remove();
+                $( "div[wliu-popup-body]", $(target_el) ).empty();
             }
             /********************************************************************************** */
         } else {
-            $(target_el).removeClass("wliu-popup-active");
-            $( "div.wliu-popup-header", $(target_el) ).remove();
-            $( "div.wliu-popup-content", $(target_el) ).empty();
+            $(target_el).removeAttr("active");
+            $( "div[wliu-popup-head]", $(target_el) ).remove();
+            $( "div[wliu-popup-body]", $(target_el) ).empty();
         }
     });
 
 
-    $(document).off("focus", "*[wliu-popup][popup-toggle='focus']").on("focus", "*[wliu-popup][popup-toggle='focus']", function(evt){
+    $(document).off("focus", "*[popup-toggle='focus']").on("focus", "*[popup-toggle='focus']", function(evt){
         var target_el = $(this).attr("popup-target");
-        var target_content  = $(this).attr("popup-content");
+        var target_content  = $(this).attr("popup-body");
 
         if( $( target_el ).is(":hidden")  ) {
             /********************************************************************************** */
             if(target_content) {
                     var target_pl       = $(this).attr("popup-placement");
-                    var target_tt       = $(this).attr("popup-title");
+                    var target_tt       = $(this).attr("popup-head");
 
-                    var def_settings = $( target_el ).data("default_settings");
-                    target_pl = target_pl?target_pl:(def_settings?def_settings.placement:"");
-                    target_tt = target_tt?target_tt:(def_settings?def_settings.title:"");
-                    
                     if( target_tt ) {
-                        if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                            $(target_el).prepend('<div class="wliu-popup-header">' + target_tt + '</div>');
+                        if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                            $(target_el).prepend('<div wliu-popup-head>' + target_tt + '</div>');
                         else 
-                            $( "div.wliu-popup-header", $(target_el) ).html(target_tt);
+                            $( "div[wliu-popup-head]", $(target_el) ).html(target_tt);
                     } else {
-                        $( "div.wliu-popup-header", $(target_el) ).remove();
+                        $( "div[wliu-popup-head]", $(target_el) ).remove();
                     }
 
-                    $( "div.wliu-popup-content", $(target_el) ).html(target_content);
-                    $(target_el).addClass("wliu-popup-active");
+                    $( "div[wliu-popup-body]", $(target_el) ).html(target_content);
+                    $(target_el).addAttr("active");
                     var nleft   = -900;
                     var ntop    = -900;
 
                     switch( ("" + target_pl).toLowerCase() ) {
                         case "left":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][left]", $(target_el)).addAttr("active");
 
                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                             break;
                         case "right":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][right]", $(target_el)).addAttr("active");
                             nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                             break;
                         case "up":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                $("s[arrow][up]", $(target_el)).addAttr("active");
                             else 
-                                $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                $("s[arrow][head-up]", $(target_el)).addAttr("active");
         
                             nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                             ntop = $(this).offset().top + $(this).outerHeight()  + 12;
                             break;
                         case "down":
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
-                            $("s.arrow-down", $(target_el)).addClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
+                            $("s[arrow][down]", $(target_el)).addAttr("active");
                             nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                             ntop = $(this).offset().top - $(target_el).outerHeight() - 12;
                             break;
                         default:
-                            $("s.arrow", $(target_el)).removeClass("arrow-active");
+                            $("s[arrow]", $(target_el)).removeAttr("active");
                             var nplace = "left";
                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
@@ -209,22 +204,22 @@ $(function(){
                                     // place to left first, then right
                                     if( cleft <= $(window).width() ) {
                                             nplace = "left";
-                                            $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                                            $("s[arrow][left]", $(target_el)).addAttr("active");
                                             nleft = $(this).offset().left + $(this).outerWidth() + 12;
                                             ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                     } else {
                                             cleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                             if( cleft >= 0 ) {
                                                     nplace = "right";
-                                                    $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                                                    $("s[arrow][right]", $(target_el)).addAttr("active");
                                                     nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                                     ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                             } else { 
                                                     nplace = "up";
-                                                    if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                                        $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                                    if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                                        $("s[arrow][up]", $(target_el)).addAttr("active");
                                                     else 
-                                                        $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                                        $("s[arrow][head-up]", $(target_el)).addAttr("active");
                                 
                                                     nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                                     ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -233,10 +228,10 @@ $(function(){
 
                             } else {
                                     nplace = "up";
-                                    if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                        $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                    if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                        $("s[arrow][up]", $(target_el)).addAttr("active");
                                     else 
-                                        $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                        $("s[arrow][head-up]", $(target_el)).addAttr("active");
                 
                                     nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                     ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -246,77 +241,73 @@ $(function(){
 
                     $(target_el).offset({left:nleft, top:ntop});
             } else {
-                $( "div.wliu-popup-header", $(target_el) ).remove();
-                $( "div.wliu-popup-content", $(target_el) ).empty();
+                $( "div[wliu-popup-head]", $(target_el) ).remove();
+                $( "div[wliu-popup-body]", $(target_el) ).empty();
             }
             /********************************************************************************** */
         } else {
-            $(target_el).removeClass("wliu-popup-active");
-            $( "div.wliu-popup-header", $(target_el) ).remove();
-            $( "div.wliu-popup-content", $(target_el) ).empty();
+            $(target_el).removeAttr("active");
+            $( "div[wliu-popup-head]", $(target_el) ).remove();
+            $( "div[wliu-popup-body]", $(target_el) ).empty();
         }
     });
 
 
-    $(document).off("mouseover", "*[wliu-popup][popup-toggle='hover']").on("mouseover", "*[wliu-popup][popup-toggle='hover']", function(evt){
+    $(document).off("mouseover", "*[popup-toggle='hover']").on("mouseover", "*[popup-toggle='hover']", function(evt){
         var target_el       = $(this).attr("popup-target");
-        var target_content  = $(this).attr("popup-content");
+        var target_content  = $(this).attr("popup-body");
 
         /*** content not empty ***/
         if(target_content) {
                 var target_pl       = $(this).attr("popup-placement");
-                var target_tt       = $(this).attr("popup-title");
-
-                var def_settings = $( target_el ).data("default_settings");
-                target_pl = target_pl?target_pl:(def_settings?def_settings.placement:"");
-                target_tt = target_tt?target_tt:(def_settings?def_settings.title:"");
+                var target_tt       = $(this).attr("popup-head");
                 
                 if( target_tt ) {
-                    if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                        $(target_el).prepend('<div class="wliu-popup-header">' + target_tt + '</div>');
+                    if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                        $(target_el).prepend('<div wliu-popup-head>' + target_tt + '</div>');
                     else 
-                        $( "div.wliu-popup-header", $(target_el) ).html(target_tt);
+                        $( "div[wliu-popup-head]", $(target_el) ).html(target_tt);
                 } else {
-                    $( "div.wliu-popup-header", $(target_el) ).remove();
+                    $( "div[wliu-popup-head]", $(target_el) ).remove();
                 }
-
-                $( "div.wliu-popup-content", $(target_el) ).html(target_content);
-                $(target_el).addClass("wliu-popup-active");
+              
+                $( "div[wliu-popup-body]", $(target_el) ).html(target_content);
+                $(target_el).addAttr("active");
                 var nleft   = -900;
                 var ntop    = -900;
 
                 switch( ("" + target_pl).toLowerCase() ) {
                     case "left":
-                        $("s.arrow", $(target_el)).removeClass("arrow-active");
-                        $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                        $("s[arrow]", $(target_el)).removeAttr("active");
+                        $("s[arrow][left]", $(target_el)).addAttr("active");
 
                         nleft = $(this).offset().left + $(this).outerWidth() + 12;
                         ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                         break;
                     case "right":
-                        $("s.arrow", $(target_el)).removeClass("arrow-active");
-                        $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                        $("s[arrow]", $(target_el)).removeAttr("active");
+                        $("s[arrow][right]", $(target_el)).addAttr("active");
                         nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                         ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                         break;
                     case "up":
-                        $("s.arrow", $(target_el)).removeClass("arrow-active");
-                        if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                            $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                        $("s[arrow]", $(target_el)).removeAttr("active");
+                        if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                            $("s[arrow][up]", $(target_el)).addAttr("active");
                         else 
-                            $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                            $("s[arrow][head-up]", $(target_el)).addAttr("active");
     
                         nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                         ntop = $(this).offset().top + $(this).outerHeight()  + 12;
                         break;
                     case "down":
-                        $("s.arrow", $(target_el)).removeClass("arrow-active");
-                        $("s.arrow-down", $(target_el)).addClass("arrow-active");
+                        $("s[arrow]", $(target_el)).removeAttr("active");
+                        $("s[arrow][down]", $(target_el)).addAttr("active");
                         nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                         ntop = $(this).offset().top - $(target_el).outerHeight() - 12;
                         break;
                     default:
-                        $("s.arrow", $(target_el)).removeClass("arrow-active");
+                        $("s[arrow]", $(target_el)).removeAttr("active");
                         var nplace = "left";
                         nleft = $(this).offset().left + $(this).outerWidth() + 12;
                         ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
@@ -326,22 +317,22 @@ $(function(){
                                 // place to left first, then right
                                 if( cleft <= $(window).width() ) {
                                         nplace = "left";
-                                        $("s.arrow-left", $(target_el)).addClass("arrow-active");
+                                        $("s[arrow][left]", $(target_el)).addAttr("active");
                                         nleft = $(this).offset().left + $(this).outerWidth() + 12;
                                         ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                 } else {
                                         cleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                         if( cleft >= 0 ) {
                                                 nplace = "right";
-                                                $("s.arrow-right", $(target_el)).addClass("arrow-active");
+                                                $("s[arrow][right]", $(target_el)).addAttr("active");
                                                 nleft = $(this).offset().left - $(target_el).outerWidth() - 12;
                                                 ntop = $(this).offset().top + $(this).outerHeight()/2 - $(target_el).outerHeight()/2;
                                         } else { 
                                                 nplace = "up";
-                                                if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                                    $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                                if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                                    $("s[arrow][up]", $(target_el)).addAttr("active");
                                                 else 
-                                                    $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                                    $("s[arrow][head-up]", $(target_el)).addAttr("active");
                             
                                                 nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                                 ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -350,10 +341,10 @@ $(function(){
 
                         } else {
                                 nplace = "up";
-                                if( $(target_el).has("div.wliu-popup-header").length<=0 )
-                                    $("s.arrow-up", $(target_el)).addClass("arrow-active");
+                                if( $(target_el).has("div[wliu-popup-head]").length<=0 )
+                                    $("s[arrow][up]", $(target_el)).addAttr("active");
                                 else 
-                                    $("s.arrow-head-up", $(target_el)).addClass("arrow-active");
+                                    $("s[arrow][head-up]", $(target_el)).addAttr("active");
             
                                 nleft = $(this).offset().left + ( $(this).outerWidth() - $(target_el).outerWidth() ) / 2;
                                 ntop = $(this).offset().top + $(this).outerHeight()  + 12;
@@ -363,16 +354,16 @@ $(function(){
 
                 $(target_el).offset({left:nleft, top:ntop});
         } else {
-            $( "div.wliu-popup-header", $(target_el) ).remove();
-            $( "div.wliu-popup-content", $(target_el) ).empty();
+            $( "div[wliu-popup-head]", $(target_el) ).remove();
+            $( "div[wliu-popup-body]", $(target_el) ).empty();
         }
         /*** --content not empty ***/
     });
-    $(document).off("mouseout", "*[wliu-popup][popup-toggle='hover']").on("mouseout", "*[wliu-popup][popup-toggle='hover']", function(evt){
+    $(document).off("mouseout", "*[popup-toggle='hover']").on("mouseout", "*[popup-toggle='hover']", function(evt){
         var target_el  = $(this).attr("popup-target");
-        $(target_el).removeClass("wliu-popup-active");
-        $( "div.wliu-popup-header", $(target_el) ).remove();
-        $( "div.wliu-popup-content", $(target_el) ).empty();
+        $(target_el).removeAttr("active");
+        $( "div[wliu-popup-head]", $(target_el) ).remove();
+        $( "div[wliu-popup-body]", $(target_el) ).empty();
     });
 
 });
