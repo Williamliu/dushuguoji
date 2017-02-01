@@ -182,7 +182,7 @@
 <br><br>
 <br><br>
 
-<div ng-controller="dsgj_studentform" class="container" style="border:0px solid red; padding:0px;">
+<div ng-controller="dsgj_studentform" class="container" style="border:0px solid red;">
 	<div class="panel panel-default">
 		<div class="panel-body" style="background-color:#eeeeee;">
 			<center>
@@ -535,11 +535,16 @@
 			<span style="font-size:14px;margin-left:20px;">4. 洗衣机和干衣机</span><br>
 			<span style="font-size:14px;margin-left:20px;">5. 寄宿家长为学生提供一日三餐和必要的零食</span><br>
 			
-			<form.label form="student_form" name="homestay_start"></form.label>
-			<form.date form="student_form" name="homestay_start" rowsn="0" tooltip="#wmtips"></form.date>
-			<span style="margin-left:100px;">&nbsp;</span>
-			<form.label form="student_form" name="homestay_end"></form.label>
-			<form.date form="student_form" name="homestay_end" rowsn="0" tooltip="#wmtips"></form.date>
+			<div class="row">
+				<div class="col-md-6">
+					<form.label form="student_form" name="homestay_start"></form.label>
+					<form.date form="student_form" name="homestay_start" rowsn="0" tooltip="#wmtips"></form.date>
+				</div>
+				<div class="col-md-6">
+					<form.label form="student_form" name="homestay_end"></form.label>
+					<form.date form="student_form" name="homestay_end" rowsn="0" tooltip="#wmtips"></form.date>
+				</div>
+			</div>
 		</div>
 	</div>
 	<br>
