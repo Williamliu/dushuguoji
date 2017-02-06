@@ -19,7 +19,7 @@ wliu_form.directive("form.rowstatus", function () {
                             'title="{{ tooltip?\'\':(form.getRow(rowsn).error.errorCode? form.getRow(rowsn).error.errorMessage : \'\') }}"',
                         '>',
                         */
-                        '<span style="color:red;" ng-if="form.getRow(rowsn).error.errorCode">Error : </span>',
+                        '<span style="color:red;" ng-if="form.getRow(rowsn).error.errorCode">填写有错误，请检查表格或鼠标点击问号查看错误 : </span>',
                         '<a class="wliu-btn24 wliu-btn24-error-help"    ng-if="form.getRow(rowsn).error.errorCode" ',
                             'popup-target="{{tooltip?tooltip:\'\'}}" popup-toggle="hover" ',
                             'popup-body="{{form.getRow(rowsn).error.errorCode?form.getRow(rowsn).error.errorMessage.nl2br():\'\'}}"',
@@ -27,8 +27,9 @@ wliu_form.directive("form.rowstatus", function () {
                         '>',
                         '</a>',
                         '<a class="wliu-btn16 wliu-btn16-rowstate-save"     ng-if="form.getRow(rowsn).error.errorCode==0 && form.getRow(rowsn).rowstate==1" style="padding-left:20px;vertical-align:middle;font-size:14px;" title="Changed">Changed</a>',
-                        '<a class="wliu-btn16 wliu-btn16-rowstate-add"      ng-if="form.getRow(rowsn).error.errorCode==0 && form.getRow(rowsn).rowstate==2" style="padding-left:20px;vertical-align:middle;font-size:14px;" title="New">New</a>',
+                        '<a class="wliu-btn16 wliu-btn16-rowstate-add"      ng-if="form.getRow(rowsn).error.errorCode==0 && form.getRow(rowsn).rowstate==2" style="padding-left:20px;vertical-align:middle;font-size:14px;" title="New"></a>',
                         '<a class="wliu-btn16 wliu-btn16-rowstate-delete"   ng-if="form.getRow(rowsn).error.errorCode==0 && form.getRow(rowsn).rowstate==3" style="padding-left:20px;vertical-align:middle;font-size:14px;" title="Deleted">Delete</a>',
+                        '<span style="color:#666666;" ng-if="!form.getRow(rowsn).error.errorCode">带红色星号<span style="color:red;font-size:1.5em;"> * </span>的内容是必填的</span>',
                         //'<div style="margin-top:12px;" ng-bind-html="getHTML()"></div>',
                     '</span>'
                 ].join(''),
@@ -1509,7 +1510,6 @@ wliu_form.directive("form.radio", function () {
                             //'ng-init="form.getCol(name, rowsn).value=form.getCol(name, rowsn).value?form.getCol(name, rowsn).value:{};" ',                          
                             'ng-repeat="rdObj in form.lists[form.colMeta(name).list].list">',
                                 '<span class="radio">',
-
                                         '<input type="radio"  scope="{{ form.scope }}" id="{{form.scope}}_{{name}}_{{rowsn}}_{{rdObj.key}}" ',
                                             'ng-model="form.getCol(name, rowsn).value" ng-value="rdObj.key"  ',
                                             'ng-change="form.changeCol(name, rowsn)" ',

@@ -91,8 +91,8 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 		<div class="row">
 			<div class="col-md-12">
 				<center>
-			<form.linkbutton form="form" rowsn="0" name="save" outline="1" actname="SAVE"></form.linkbutton>
-			<form.linkbutton form="form" rowsn="0" name="cancel" outline="1" actname="CANCEL"></form.linkbutton>
+			<form.linkbutton form="form" rowsn="0" name="save" outline="1" actname="提交"></form.linkbutton>
+			<form.linkbutton form="form" rowsn="0" name="cancel" outline="1" actname="取消"></form.linkbutton>
 				</center>
 		    </div>
 		</div>

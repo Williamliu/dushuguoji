@@ -117,8 +117,8 @@
 					keys: {rowsn:-1, name:""}, 
 					list: [
 						{ key: 200, 	value: "1. Airport Pick-up 接机 ($200加元)", desc: "" },
-						{ key: 400, 	value: "2. Homestay Placement寄宿家庭安置费 ($400加元)", desc: "" },
-						{ key: 1400, 	value: "3. Custodian法律监护服务 ($1200加元/学年 + $200加元 (律师公证费))", desc: "" }
+						{ key: 400, 	value: "2. Homestay Placement Fee 寄宿家庭安置费 ($400加元)", desc: "" },
+						{ key: 1400, 	value: "3. Custodian 法律监护服务 ($1200加元/学年 + $200加元 (律师公证费))", desc: "" }
 					]
 				},
 		sservice: {	loaded: 2,
@@ -181,7 +181,6 @@
 <div style="clear:both;"></div>
 <br><br>
 <br><br>
-
 <div ng-controller="dsgj_studentform" class="container" style="border:0px solid red;">
 	<div class="panel panel-default">
 		<div class="panel-body" style="background-color:#eeeeee;">
@@ -195,6 +194,11 @@
 			</center>
 		</div>
 	</div>
+
+	<span style="float:right">
+	点击这里：<a href="dsgj_registration.pdf" target="_blank">下载精品境外服务表格</a>
+	</span>
+	<br>
 
 	<ul wliu-tab9 color-awesome>
 		<li>选择精品境外服务</li>
@@ -239,14 +243,14 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form.label form="student_form" name="rd_service"></form.label>
+			<form.label style="font-size:16px;" form="student_form" name="rd_service"></form.label>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div style="padding-left:30px;">
 				关于: <a href="http://www.dushuguoji.com/nxservice.php#nx" target="_blank">暖心服务</a> | <a href="http://www.dushuguoji.com/nxservice.php#tx" target="_blank">贴心服务</a> | <a href="http://www.dushuguoji.com/nxservice.php#qz" target="_blank">亲子服务</a> 
-				<form.radio form="student_form" name="rd_service" rowsn="0" colnum="1" tooltip="#wmtips"></form.radio>
+				<form.radio form="student_form" name="rd_service" rowsn="0" colnum="1"></form.radio>
 			</div>
 		</div>
 	</div>
@@ -267,19 +271,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_fname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_lname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_oname"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -287,7 +291,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="passport"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -312,19 +316,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_address"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_state"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_state" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_city"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -332,19 +336,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_postal"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_postal" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="stu_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -352,7 +356,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="stu_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -366,7 +370,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="par_address"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
@@ -374,19 +378,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="par_state"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="par_state" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="par_city"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="par_city" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="par_postal"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -401,7 +405,7 @@
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="dad_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="dad_birth"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -412,19 +416,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="dad_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="dad_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="dad_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="dad_email" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="dad_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -439,7 +443,7 @@
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="mom_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="mom_birth"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -450,19 +454,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="mom_phone"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="mom_phone" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="mom_email"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="mom_email" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="mom_wechat"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -483,19 +487,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="airline"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="airline" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="flight"></form.label>
 		</div>
 		<div class="col-md-1 text-md-left">
 			<form.textbox form="student_form" name="flight" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="pickup_datetime"></form.label>
 		</div>
 		<div class="col-md-3 text-md-left">
@@ -581,7 +585,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4 text-md-right">
+		<div class="col-md-4 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_character"></form.label>
 		</div>
 		<div class="col-md-8 text-md-left">
@@ -589,19 +593,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_horby"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="per_horby" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_sport"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="per_sport" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_music"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -609,13 +613,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_food"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
 			<form.textbox form="student_form" name="per_food" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
 		</div>
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="per_vegit"></form.label>
 		</div>
 		<div class="col-md-2 text-md-left">
@@ -625,11 +629,11 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">Your requirement for homestay对寄宿家庭的期望</span>
+			<span style="font-size:16px; border-bottom:2px solid #8C30E2;">Your requirement for homestay 对寄宿家庭的期望</span>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="homestay_child"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
@@ -637,7 +641,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="homestay_envir"></form.label>
 		</div>
 		<div class="col-md-10 text-md-left">
@@ -645,7 +649,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right">
+		<div class="col-md-2 text-md-right text-nowrap">
 			<form.label form="student_form" name="homestay_other"></form.label>
 		</div>
 		<div class="col-md-6 text-md-left">
@@ -658,7 +662,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-12">
-			Letter of Introduction to Host Parents学生给寄宿家长的信
+			Letter of Introduction to Host Parents 学生给寄宿家长的信
 			<form.label form="student_form" name="homestay_letter"></form.label>
 		</div>
 	</div>
@@ -698,7 +702,7 @@
 			<center>
 				<form.linkbutton form="student_form" rowsn="0" name="save"  	actname="提交表格" tooltip="#wmtips"></form.linkbutton>
 				<form.linkbutton form="student_form" rowsn="0" name="cancel" 	actname="清除重填" tooltip="#wmtips"></form.linkbutton>
-				<form.rowstatus form="student_form" rowsn="0" tooltip="#wmtips"></form.rowstatus>
+				<form.rowstatus form="student_form" rowsn="0" tooltip="#wmtips" style="margin-left:30px;"></form.rowstatus>
 			</center>
 		</div>
 	</div>

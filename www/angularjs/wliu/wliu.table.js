@@ -1765,6 +1765,7 @@ wliu_table.directive("table.radio", function () {
 
                                         '<input type="radio"  scope="{{ table.scope }}" id="{{table.scope}}_{{name}}_{{rowsn}}_{{rdObj.key}}" ',
                                             'ng-model="table.getCol(name, rowsn).value" ng-value="rdObj.key"  ',
+                                            'ng-click="radio_click(rdObj.key)" ',
                                             'ng-change="table.changeCol(name, rowsn)" ',
                                             'ng-disabled="table.getCol(name, rowsn)==undefined" ',
                                         '/>',
@@ -1780,6 +1781,9 @@ wliu_table.directive("table.radio", function () {
                     '</div>'
                 ].join(''),
         controller: function ($scope) {
+            $scope.radio_click = function( rval ) {
+                console.log("value: " + rval + "  val: " + $scope.table.getCol($scope.name, $scope.rowsn).value);
+            }
         },
         link: function (sc, el, attr) {
         }
