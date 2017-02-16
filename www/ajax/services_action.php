@@ -55,7 +55,7 @@ try {
 
 	// 5) if success ,  to do other thing
 	// 5) if success ,  to do other thing
-	if( $table["success"] && $table["action"]=="save" ) {
+	if(false || $table["success"] && $table["action"]=="save" ) {
 		$rows = $table["rowsArray"];
 		$info = $rows[0];
 		$a["from"] 		= $info["stu_email"];
@@ -79,7 +79,7 @@ try {
 
 
 	// 6) return 
-	cACTION::clearRows($table);  // clear save case rows value but keys 
+	if(!DEBUG) cACTION::clearRows($table);  // clear save case rows value but keys 
 	$response["table"] = $table;
 
 
