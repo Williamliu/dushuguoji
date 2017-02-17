@@ -136,10 +136,7 @@
         </div>
         <!--/Second column-->
     </div>
-
-
 </div>
-
 <?php include("public_foot.php"); ?>
 </body>
 </html>

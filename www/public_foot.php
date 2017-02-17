@@ -1,5 +1,3 @@
-<br><br>
-<br><br>
 <!--Footer-->
 <footer class="page-footer  stylish-color">
 	<!--Footer Links-->
