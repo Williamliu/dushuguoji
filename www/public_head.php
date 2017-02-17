@@ -25,6 +25,7 @@
 <script type="text/javascript" 	src="angularjs/angular-1.3.15/angular-cookies.js"></script>
 <script type="text/javascript" 	src="angularjs/angular-1.3.15/angular-sanitize.min.js"></script>
 
+<script src="jquery/plugin/ckeditor_full/ckeditor.js" type="text/javascript"></script>
 
 <!-- wliu components -->
 <script src="js/wliu/wliu.common.js" type="text/javascript"></script>

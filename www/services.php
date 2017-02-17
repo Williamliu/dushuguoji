@@ -7,6 +7,7 @@
 <?php include("public_menu.php"); ?>
 
 <script language="javascript" type="text/javascript">
+    var iImage = new WLIU.IMAGE();
 	var col0 = new WLIU.COL({key:1, coltype:"hidden", 		name:"id", 				colname:"ID" });
 	var col1 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_name", 	maxlength:128,	colname:"Name of School 学校名称 (英文)", need: 1 });
 	var col2 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_address", 	maxlength:128,	colname:"Address of School 学校地址 (英文)" });
@@ -59,6 +60,7 @@
 	var col47 = new WLIU.COL({key:0, coltype:"textbox", 	name:"homestay_other", 	maxlength:256,	colname:"其它特别要求"});
 	var col48 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_letter", maxlength:1024,	colname:"(简单的介绍自己， 以及为什么选择到加拿大留学，需用英文写)"});
 	var col49 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_concern",maxlength:1024,	colname:"Parental Concerns 学生家长关心的问题 (请家长填写)"});
+	var col50 = new WLIU.COL({key:0, coltype:"textbox", 	name:"passport_copy"});
 
 	var cols = [];
 	cols.push(col0);
@@ -111,6 +113,7 @@
 	cols.push(col47);
 	cols.push(col48);
 	cols.push(col49);
+	cols.push(col50);
 	
 	var tablists = {
 		mservice: {	loaded: 2, 
@@ -162,6 +165,7 @@
 	});
 
 	app.controller("dsgj_studentform", function ($scope) {
+        FIMAGE.setScope(iImage, $scope, "myimg");
 		student_table.setScope( $scope, "student_form" );
 		student_table.addRecord();
 		//student_table.getRecord({id:2});
@@ -300,7 +304,7 @@
 		<div class="col-md-8 text-md-left">
 			<span class="wliuCommon-tips">请提供护照信息页影印件 </span>
 			<span class="wliuCommon-tips">请提供签证影印件 </span>
-			
+			<form.imgupload form="student_form" rowsn="0" name="passport_copy" imgobj="myimg" view="medium" actname="Upload Image"></form.imgupload>
 		</div>
 	</div>
 	<div class="row">

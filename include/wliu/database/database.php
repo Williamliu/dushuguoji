@@ -1584,7 +1584,10 @@ class cACTION {
 				cACTION::checkUniques($db, $table);
 				cACTION::saveRows($db, $table);
 				break;
-			case "init":
+			case "custom":
+				cLIST::getList($db, $table);
+				cVALIDATE::validate($table);
+				cACTION::checkUniques($db, $table);
 				break;
 		}
 		cACTION::getRowArray($table);
@@ -1668,6 +1671,7 @@ class cACTION {
 						}
 						break;
 					case "save":
+					case "custom":
 						foreach($theRow["cols"] as &$theCol) {
 							if( !$theCol["key"] ) {
 								unset($theCol["value"]);
@@ -2016,7 +2020,7 @@ class cACTION {
 								$table["success"] 				= 0;
 								$theRow["error"]["errorCode"] 	= 1;
 								$theRow["cols"][$cidx]["errorCode"] 		= 1;  
-								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already used in our database.";  
+								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already in used.";  
 							}
 							break;
 						case 2:
@@ -2025,7 +2029,7 @@ class cACTION {
 								$table["success"] 				= 0;
 								$theRow["error"]["errorCode"] 	= 1;
 								$theRow["cols"][$cidx]["errorCode"] 		= 1;  
-								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already used in our database.";  
+								$theRow["cols"][$cidx]["errorMessage"] 		= "'" . $uCol["colname"] . "' already in used.";  
 							}
 							break;
 						case 3:
@@ -2381,8 +2385,19 @@ class cVALIDATE {
 							case "textarea":
 							case "ckeditor":
 							case "password":
-								if(!$theCol["value"]) $theCol["value"]="";
-								if( $dataType == "NUMBER" ) $theCol["value"] = is_numeric($theCol["value"])?$theCol["value"]:0;
+								if( $dataType == "NUMBER" ) {
+									if( is_numeric($theCol["value"]) ) {
+										$theCol["value"] = is_numeric($theCol["value"])?$theCol["value"]:0;
+									} else {
+										$table["success"] 				= 0;
+										$theRow["error"]["errorCode"] 	= 1;
+										$theCol["errorCode"] 			= 1;  
+										$theCol["errorMessage"] 		= "'" . $dispName . "' is invalid NUMBER type.";  
+									}
+								} 
+
+								if(!$theCol["value"] && $dataType != "NUMBER") $theCol["value"]="";
+								
 
 								if($notNull) {
 									if($theCol["value"]=="") {

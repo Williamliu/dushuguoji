@@ -64,6 +64,8 @@ $.fn.extend({
         }
 
         return this.each(function (idx, el) {
+            if( !$(el).hasClass("wliu-diag") ) $(el).addClass("wliu-diag");
+
             $(el).data("default_settings", def_settings);
 
             if ($("div.lwhDiag-content", el).length <= 0) {

@@ -31,3 +31,5 @@ RewriteRule ^(/)?$ www/index.php [L]
 # php_value memory_limit 256M
 # For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
 # php_value max_input_vars 5000 
+
+LimitRequestBody 0

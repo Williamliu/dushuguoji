@@ -60,7 +60,7 @@ wliu_table.directive("table.navi", function () {
                         '</div>',
                         '<div class="pull-right" style="padding:0px; margin:0px;" ng-if="table.navi.pagetotal>0 || table.navi.recordtotal>0">',
                             '<span style="vertical-align:middle;">Size: </span>',                           
-                            '<input type="text" class="input-tiny" style="height:1.2em;width:30px;font-size:1.2em;text-align:center;" ng-model="table.navi.pagesize" ',
+                            '<input type="text" class="input-tiny" style="height:1.2em;width:40px;font-size:1.2em;text-align:center;" ng-model="table.navi.pagesize" ',
                                 'ng-keypress="keypress($event)" ',                                
                                 'popup-target="{{tooltip?tooltip:\'\'}}" popup-toggle="hover" popup-body="Page Size" ',
                                 'title="{{tooltip? \'\':\'Page Size\'}}" ',
@@ -263,14 +263,14 @@ wliu_table.directive("table.ckeditor", function () {
         scope: {
             table:      "=",
             rowsn:      "@",
-            name:       "@"
+            name:       "@",
+            hh:         "@"
         },
         template: [
                     '<span ng-hide="table.relationHide(rowsn, name)">',
                         '<a class="wliu-btn16 wliu-btn16-rowstate-error" ng-if="table.getCol(name, rowsn).errorCode"></a>',
                         '<span style="color:red; vertical-align:middle;" ng-if="table.getCol(name, rowsn).errorCode">Error: {{table.getCol(name, rowsn).errorCode?table.getCol(name, rowsn).errorMessage:""}}</span>',
-                        '<input type="hidden" ng-model="rowsn" ng-change="modelChange()" />',
-                        '<textarea scope="{{ table.scope }}" ng-model="table.getCol(name, rowsn).value" id="{{table.scope}}_{{name}}"" ',
+                        '<textarea scope="{{ table.scope }}" ng-model="table.getCol(name, rowsn).value" id="{{table.scope}}_{{name}}_{{rowsn}}" ',
                                   'title="{{ table.getRow(rowsn).error.errorCode ? table.getRow(rowsn).error.errorMessage : \'\' }}"',
                         '>',
                         '</textarea>',
@@ -281,27 +281,102 @@ wliu_table.directive("table.ckeditor", function () {
             //  only sync to ckeditor when initialize the model.
             $scope.modelChange = function() {
                 if( $scope.table.getCol($scope.name, $scope.rowsn) )  {
-                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name])
-                        CKEDITOR.instances[$scope.table.scope+"_"+$scope.name].setData( $scope.table.getCol($scope.name, $scope.rowsn).value );
+                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                        if( $scope.table.getCol( $scope.name, $scope.rowsn ).value != CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].getData() )
+                            CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData( $scope.table.getCol($scope.name, $scope.rowsn).value );
                 }  else {
-                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name])
-                        CKEDITOR.instances[$scope.table.scope+"_"+$scope.name].setData("");
+                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                        CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData("");
                 }
             }
-            $scope.$watch("rowsn", $scope.modelChange);
+            $scope.$watch("table.getCol(name, rowsn).value", $scope.modelChange);
         },
         link: function (sc, el, attr) {
             $(function(){
-                htmlObj_cn = CKEDITOR.replace(sc.table.scope + "_" + sc.name,{});
+                htmlObj_cn = CKEDITOR.replace(sc.table.scope + "_" + sc.name+"_"+sc.rowsn,{height:sc.hh});
                 // The "change" event is fired whenever a change is made in the editor.
                 htmlObj_cn.on('change', function (evt) {
                     if( sc.table.getCol( sc.name, sc.rowsn ) ) {
-                        if( sc.table.getCol( sc.name, sc.rowsn ).value != CKEDITOR.instances[sc.table.scope+"_"+sc.name].getData() ) {
-                            sc.table.getCol( sc.name, sc.rowsn ).value = CKEDITOR.instances[sc.table.scope+"_"+sc.name].getData();
+                        if( sc.table.getCol( sc.name, sc.rowsn ).value != CKEDITOR.instances[sc.table.scope+"_"+sc.name+"_"+sc.rowsn].getData() ) {
+                            sc.table.getCol( sc.name, sc.rowsn ).value = CKEDITOR.instances[sc.table.scope+"_"+sc.name+"_"+sc.rowsn].getData();
                             sc.table.changeCol(sc.name, sc.rowsn);
                             // to prevent diggest in progress in angular.
                             if( !sc.$root.$$phase) sc.$apply();
-                            
+                        }
+                    }
+                });
+            });
+        }
+    }
+});
+
+wliu_table.directive("table.ckinline", function () {
+    return {
+        restrict: "E",
+        replace: true,
+        scope: {
+            table:      "=",
+            rowsn:      "@",
+            name:       "@",
+            hh:         "@"
+        },
+        template: [
+                    '<div>',
+                        '<a class="wliu-btn16 wliu-btn16-rowstate-error" ng-if="table.getCol(name, rowsn).errorCode"></a>',
+                        '<span style="color:red; vertical-align:middle;" ng-if="table.getCol(name, rowsn).errorCode">Error: {{table.getCol(name, rowsn).errorCode?table.getCol(name, rowsn).errorMessage:""}}</span>',
+                        '<input type="hidden" ng-model="table.getCol(name, rowsn).value" />',
+                        '<div scope="{{ table.scope }}" id="{{table.scope}}_{{name}}_{{rowsn}}" contentEditable=true ',
+                                //'ng-bind-html="table.getCol(name, rowsn).value" ',
+                                'style="display:block;overflow:auto;min-height:120px;height:{{hh?hh+\'px\':\'auto\'}};border:1px solid #cccccc;">',
+                            '{{ table.getCol(name, rowsn).value }}',
+                        '</div>',
+                    '</div>'
+                ].join(''),
+        controller: function ($scope) {
+            //  model change ,  it will not sync to ckeditor
+            //  only sync to ckeditor when initialize the model.
+            $scope.getHTML = function() {
+                if( $scope.table.getCol($scope.name, $scope.rowsn) )
+                    return $sce.trustAsHtml($scope.table.getCol($scope.name, $scope.rowsn).value);
+                else 
+                    return $sce.trustAsHtml("");
+            }
+
+            if( $scope.table.getCol($scope.name, $scope.rowsn) )  {
+                if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                    if( $scope.table.getCol( $scope.name, $scope.rowsn ).value != CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].getData() )
+                        CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData( $scope.table.getCol($scope.name, $scope.rowsn).value );
+            }  else {
+                if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                    CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData("");
+            }
+
+
+
+            $scope.modelChange = function() {
+                if( $scope.table.getCol($scope.name, $scope.rowsn) )  {
+                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                        if( $scope.table.getCol( $scope.name, $scope.rowsn ).value != CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].getData() )
+                            CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData( $scope.table.getCol($scope.name, $scope.rowsn).value );
+                }  else {
+                    if(CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn])
+                        CKEDITOR.instances[$scope.table.scope+"_"+$scope.name+"_"+$scope.rowsn].setData("");
+                }
+            }
+            $scope.$watch("table.getCol(name, rowsn).value", $scope.modelChange);
+        },
+        link: function (sc, el, attr) {
+            $(function(){
+                CKEDITOR.disableAutoInline = true;
+                htmlObj_cn = CKEDITOR.inline(sc.table.scope + "_" + sc.name+"_"+sc.rowsn);
+                // The "change" event is fired whenever a change is made in the editor.
+                htmlObj_cn.on('change', function (evt) {
+                    if( sc.table.getCol( sc.name, sc.rowsn ) ) {
+                        if( sc.table.getCol( sc.name, sc.rowsn ).value != CKEDITOR.instances[sc.table.scope+"_"+sc.name+"_"+sc.rowsn].getData() ) {
+                            sc.table.getCol( sc.name, sc.rowsn ).value = CKEDITOR.instances[sc.table.scope+"_"+sc.name+"_"+sc.rowsn].getData();
+                            sc.table.changeCol(sc.name, sc.rowsn);
+                            // to prevent diggest in progress in angular.
+                            if( !sc.$root.$$phase) sc.$apply();
                         }
                     }
                 });
@@ -848,7 +923,7 @@ wliu_table.directive("table.intdate", function () {
             format:     "@"
         },
         template: [
-                    '<span ng-hide="table.relationHide(rowsn, name)">{{ table.getCol(name, rowsn).value?(table.getCol(name, rowsn).value>0?(table.getCol(name, rowsn).value * 1000 | date : (format?format:"yyyy-MM-dd hh:mm") ):"") :"" }}</span>'
+                    '<span ng-hide="table.relationHide(rowsn, name)">{{ table.getCol(name, rowsn).value?(table.getCol(name, rowsn).value>0?(table.getCol(name, rowsn).value * 1000 | date : (format?format:"yyyy-MM-dd H:mm") ):"") :"" }}</span>'
 				  ].join(''),
         controller: function ($scope) {
         }
@@ -1765,7 +1840,6 @@ wliu_table.directive("table.radio", function () {
 
                                         '<input type="radio"  scope="{{ table.scope }}" id="{{table.scope}}_{{name}}_{{rowsn}}_{{rdObj.key}}" ',
                                             'ng-model="table.getCol(name, rowsn).value" ng-value="rdObj.key"  ',
-                                            'ng-click="radio_click(rdObj.key)" ',
                                             'ng-change="table.changeCol(name, rowsn)" ',
                                             'ng-disabled="table.getCol(name, rowsn)==undefined" ',
                                         '/>',
@@ -1781,9 +1855,6 @@ wliu_table.directive("table.radio", function () {
                     '</div>'
                 ].join(''),
         controller: function ($scope) {
-            $scope.radio_click = function( rval ) {
-                console.log("value: " + rval + "  val: " + $scope.table.getCol($scope.name, $scope.rowsn).value);
-            }
         },
         link: function (sc, el, attr) {
         }
@@ -2889,14 +2960,16 @@ wliu_table.directive("table.bicon", function (wliuTableService) {
             xsize:      "@",
             name:       "@",
             actname:    "@",
-            action:     "&"
+            action:     "&",
+            tooltip:    "@"
         },
         template: [
                     '<span>',
                     '<a class="wliu-btn{{xsize}} wliu-btn{{xsize}}-{{name}}" scope="{{ table.scope }}" ',
-                        'title="{{actname?actname:name}}"',
                         'ng-click="action1(table.getRow(rowsn))" ',
                         'ng-if="buttonState(name, table.getRow(rowsn).rowstate)"',
+                        'popup-target="{{tooltip?tooltip:\'\'}}" popup-toggle="hover" popup-body="{{actname?actname:name}}" popup-placement="down" ',
+                        'title="{{tooltip?\'\':actname?actname:name}}" ',
                     '>',
                     '</a>',
                     '</span>'
@@ -3116,14 +3189,16 @@ wliu_table.directive("table.hicon", function (wliuTableService) {
             xsize:      "@",
             name:       "@",
             actname:    "@",
-            action:     "&"
+            action:     "&",
+            tooltip:    "@"
         },
         template: [
                     '<span>',
                     '<a class="wliu-btn{{xsize}} wliu-btn{{xsize}}-{{name}}" scope="{{ table.scope }}" ',
-                        'title="{{actname?actname:name}}"',
                         'ng-click="action1()" ',
                         'ng-if="buttonState(name, rowstate())"',
+                        'popup-target="{{tooltip?tooltip:\'\'}}" popup-toggle="hover" popup-body="{{actname?actname:name}}" popup-placement="down" ',
+                        'title="{{tooltip?\'\':actname?actname:name}}" ',
                     '>',
                     '</a>',
                     '</span>'
