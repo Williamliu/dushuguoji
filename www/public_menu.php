@@ -18,6 +18,10 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
                 <li>
 					<a href="index.php" title="读书国际首页">首页</a>
 				</li>
+                <li>
+					<a href="aboutus.php" title="关于我们">关于我们</a>
+				</li>
+				<!--
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="学校介绍">官方代理</a>
 					<ul class="dropdown-menu">
@@ -32,6 +36,7 @@ $temp_name = substr($_SERVER["SCRIPT_NAME"],  strrpos($_SERVER["SCRIPT_NAME"], "
 						</li>
 					</ul>
 				</li>
+				-->
 				<li>
 					<a href="nxservice.php" title="家长放心服务">家长放心服务</a>
 				</li>

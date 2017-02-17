@@ -13,11 +13,10 @@
 	<img src="theme/light/company/Title-002.jpg" style="width:100%;" class="animated wow bounceInUp z-depth-2" />
 	<br>
 	<br>
-	
+	<!--
 	<div class="panel panel-default z-depth-2">
 		<div class="panel-body">
 			<div class="row">
-				<!--
 				<div class="col-md-3">
 					<div class="view">
 						<img class="img-thumbnail img-fluid" src="theme/light/company/subject01.jpg" />
@@ -26,7 +25,6 @@
 						</div>
 					</div>
 				</div>
-				-->
 				<div class="col-md-4">
 					<div class="view">
 						<img class="img-thumbnail img-fluid" src="theme/light/company/subject02.jpg" />
@@ -57,6 +55,7 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<br>
 
