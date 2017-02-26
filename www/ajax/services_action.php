@@ -30,7 +30,7 @@ try {
 							"keys"=>array("id"),  
 							"fkeys"=>array(), 
 							"cols"=>array(
-								"id","school_name", "school_address", "ck_service", "rd_service", "stu_fname", "stu_lname", "stu_oname", "passport","passport_copy", "en_score",
+								"id","school_name", "school_address", "school_copy", "ck_service", "rd_service", "stu_fname", "stu_lname", "stu_oname", "passport","passport_copy", "visa_copy", "en_score",
 								"stu_address","stu_state", "stu_postal", "stu_email", "stu_phone", "stu_wechat", 
 								"dad_fname","dad_email", "dad_phone", "dad_wechat", "dad_birth", "mom_fname", "mom_email", "mom_phone", "mom_wechat", "mom_birth", 
 								"par_address","par_state", "par_city", "par_postal", "airline", "flight", "pickup_datetime", "destination", "homestay_start", "homestay_end", 

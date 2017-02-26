@@ -7,7 +7,6 @@
 <?php include("public_menu.php"); ?>
 
 <script language="javascript" type="text/javascript">
-    var iImage = new WLIU.IMAGE();
 	var col0 = new WLIU.COL({key:1, coltype:"hidden", 		name:"id", 				colname:"ID" });
 	var col1 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_name", 	maxlength:128,	colname:"Name of School 学校名称 (英文)", need: 1 });
 	var col2 = new WLIU.COL({key:0, coltype:"textbox", 		name:"school_address", 	maxlength:128,	colname:"Address of School 学校地址 (英文)" });
@@ -60,7 +59,9 @@
 	var col47 = new WLIU.COL({key:0, coltype:"textbox", 	name:"homestay_other", 	maxlength:256,	colname:"其它特别要求"});
 	var col48 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_letter", maxlength:1024,	colname:"(简单的介绍自己， 以及为什么选择到加拿大留学，需用英文写)"});
 	var col49 = new WLIU.COL({key:0, coltype:"textarea", 	name:"homestay_concern",maxlength:1024,	colname:"Parental Concerns 学生家长关心的问题 (请家长填写)"});
-	var col50 = new WLIU.COL({key:0, coltype:"textbox", 	name:"passport_copy"});
+	var col50 = new WLIU.COL({key:0, coltype:"upload", 		name:"passport_copy",   colname:"请提供护照信息页影印件", view:"large" });
+	var col51 = new WLIU.COL({key:0, coltype:"upload", 		name:"school_copy",   	colname:"请提供录取函影印件", view:"large" });
+	var col52 = new WLIU.COL({key:0, coltype:"upload", 		name:"visa_copy",   	colname:"请提供签证影印件", view:"large" });
 
 	var cols = [];
 	cols.push(col0);
@@ -114,6 +115,8 @@
 	cols.push(col48);
 	cols.push(col49);
 	cols.push(col50);
+	cols.push(col51);
+	cols.push(col52);
 	
 	var tablists = {
 		mservice: {	loaded: 2, 
@@ -165,10 +168,9 @@
 	});
 
 	app.controller("dsgj_studentform", function ($scope) {
-        FIMAGE.setScope(iImage, $scope, "myimg");
 		student_table.setScope( $scope, "student_form" );
 		student_table.addRecord();
-		//student_table.getRecord({id:2});
+		//student_table.getRecord({id:4});
 
 		$scope.totalAmt = function() {
 			var total = 0;
@@ -209,30 +211,36 @@
 	</ul>
 	<br>
 	<div class="row">
-		<div class="col-md-12">
-			<span style="font-size:16px; border-bottom:2px solid #FE2354;">School Information 录取学校信息</span>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 text-nowrap">
-				<form.label form="student_form" name="school_name"></form.label>
-		</div>
 		<div class="col-md-9">
-				<form.textbox form="student_form" name="school_name" rowsn="0" style="width:100%"  tooltip="#wmtips"></form.textbox>
+			<div class="row">
+				<div class="col-md-12">
+					<span style="font-size:16px; border-bottom:2px solid #FE2354;">School Information 录取学校信息</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 text-md-right text-nowrap">
+						<form.label form="student_form" name="school_name"></form.label>
+				</div>
+				<div class="col-md-7">
+						<form.textbox form="student_form" name="school_name" rowsn="0" style="width:100%"  tooltip="#wmtips"></form.textbox>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-5 text-md-right text-nowrap">
+						<form.label form="student_form" name="school_address"></form.label>
+				</div>
+				<div class="col-md-7">
+						<form.textbox form="student_form" name="school_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 text-nowrap">
-				<form.label form="student_form" name="school_address"></form.label>
-		</div>
-		<div class="col-md-9">
-				<form.textbox form="student_form" name="school_address" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<span class="wliuCommon-tips">请提供录取函影印件</span>
-		</div>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12">
+					<form.imgupload form="student_form" rowsn="0" name="school_copy" view="medium" actname="请提供录取函影印件，点击图标上传图片" ww=160 hh=120></form.imgupload>
+				</div>
+			</div>
+		</div>		
 	</div>
 	<br>
 	<div class="row">
@@ -275,38 +283,56 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2 text-md-right text-nowrap">
-			<form.label form="student_form" name="stu_fname"></form.label>
+		<div class="col-md-6">
+			<div class="row">
+					<div class="col-md-6 text-md-right text-nowrap">
+						<form.label form="student_form" name="stu_fname"></form.label>
+					</div>
+					<div class="col-md-6 text-md-left">
+						<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col-md-6 text-md-right text-nowrap">
+						<form.label form="student_form" name="stu_lname"></form.label>
+					</div>
+					<div class="col-md-6 text-md-left">
+						<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col-md-6 text-md-right text-nowrap">
+						<form.label form="student_form" name="stu_oname"></form.label>
+					</div>
+					<div class="col-md-6 text-md-left">
+						<form.textbox form="student_form" name="stu_oname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col-md-6 text-md-right text-nowrap">
+						<form.label form="student_form" name="passport"></form.label>
+					</div>
+					<div class="col-md-6 text-md-left">
+						<form.textbox form="student_form" name="passport" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+					</div>
+			</div>
 		</div>
-		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_fname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12 text-md-left">
+					<form.imgupload form="student_form" rowsn="0" name="passport_copy" view="medium" actname="请提供护照信息页影印件" ww=200 hh=160></form.imgupload>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-2 text-md-right text-nowrap">
-			<form.label form="student_form" name="stu_lname"></form.label>
-		</div>
-		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_lname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
-		</div>
-		<div class="col-md-2 text-md-right text-nowrap">
-			<form.label form="student_form" name="stu_oname"></form.label>
-		</div>
-		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="stu_oname" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
+		<div class="col-md-3">
+			<div class="row">
+				<div class="col-md-12 text-md-left">
+					<form.imgupload form="student_form" rowsn="0" name="visa_copy" view="medium" actname="请提供签证影印件" ww=200 hh=160></form.imgupload>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-2 text-md-right text-nowrap">
-			<form.label form="student_form" name="passport"></form.label>
-		</div>
-		<div class="col-md-2 text-md-left">
-			<form.textbox form="student_form" name="passport" rowsn="0" style="width:100%" tooltip="#wmtips"></form.textbox>
-		</div>
-		<div class="col-md-8 text-md-left">
-			<span class="wliuCommon-tips">请提供护照信息页影印件 </span>
-			<span class="wliuCommon-tips">请提供签证影印件 </span>
-			<form.imgupload form="student_form" rowsn="0" name="passport_copy" imgobj="myimg" view="medium" actname="Upload Image"></form.imgupload>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			English Proficiency via Standardized Tests, IELTS, TOEFL 英文成绩TOEFL或雅思 (如果有)

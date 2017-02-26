@@ -277,7 +277,7 @@ WLIU.COL = function(opts) {
 		col:		"", // default same as name, col is database colname
 		colname:	"", // display name
 		coldesc:    "", // display description
-		coltype:	"textbox",  //hidden, textbox, checkbox,checkbox1,checkbox2,checkbox3, radio, select, textarea, datetime, date, time, intdate ....
+		coltype:	"textbox",  //hidden, textbox, checkbox,checkbox1,checkbox2,checkbox3, radio, select, textarea, datetime, date, time, intdate, upload ....
 		datatype:   "ALL",  // number, email, date, datetime, ....
 		need:		0,     // required  must include this col even if value not change.  other is must change
 		notnull:  	0,     // not null - not allowed null, different from need 
@@ -395,9 +395,13 @@ WLIU.FILE = function( opts ) {
 WLIU.IMAGE = function( opts ) {
 	this.image 		= {
 		state: 			0,  // 0 - ready for upload, 1 - uploading,  2- done,  9 - error
+		sn:             0,  // sn for image array index
+		rowsn:	        0,  // rowsn for list GUID , for webpage layout
 		errorCode:		0, 
 		errorMessage:	"",
+
 		scope: 			"",
+		id:    			0,
 		key1:			0,
 		key2:			0,
 		key3:			0,
@@ -420,12 +424,12 @@ WLIU.IMAGE = function( opts ) {
 		status:     	0,
 
 		resize:     {
-			 origin:	{ ww: 1200, 	hh:1200, 	width:0, height:0,  name:"", size: 0, data:"" },
-			 thumb: 	{ ww: 60, 		hh:60, 		width:0, height:0,  name:"", size: 0, data:"" },
-			 tiny: 		{ ww: 120, 		hh:120, 	width:0, height:0,  name:"", size: 0, data:"" },
-			 small: 	{ ww: 200, 		hh:200, 	width:0, height:0,  name:"", size: 0, data:"" },
-			 medium: 	{ ww: 500, 		hh:500, 	width:0, height:0,  name:"", size: 0, data:"" },
-			 large:		{ ww: 1000, 	hh:1000, 	width:0, height:0,  name:"", size: 0, data:"" }
+			 origin:	{ ww: 1600, 	hh:1600, 	width:0, height:0,  name:"", size: 0, data:"" },
+			 thumb: 	{ ww: 100, 		hh:100, 		width:0, height:0,  name:"", size: 0, data:"" },
+			 tiny: 		{ ww: 200, 		hh:200, 	width:0, height:0,  name:"", size: 0, data:"" },
+			 small: 	{ ww: 600, 		hh:600, 	width:0, height:0,  name:"", size: 0, data:"" },
+			 medium: 	{ ww: 1000, 	hh:1000, 	width:0, height:0,  name:"", size: 0, data:"" },
+			 large:		{ ww: 1200, 	hh:1200, 	width:0, height:0,  name:"", size: 0, data:"" }
 		}
 	};
 	$.extend(this.image, opts);
@@ -667,6 +671,8 @@ WLIU.ROWACTION.prototype = {
 			case "textarea":
 			case "ckeditor":
 			case "password":
+			case "upload":
+			case "editor":
 				ret_val = theCol.value?theCol.value:"";
 				break;
 			case "checkbox":
@@ -734,6 +740,8 @@ WLIU.ROWACTION.prototype = {
 			case "textarea":
 			case "ckeditor":
 			case "password":
+			case "upload":
+			case "editor":
 
 			case "checkbox":
 			case "checkbox1":
@@ -827,6 +835,8 @@ WLIU.ROWACTION.prototype = {
 			case "textarea":
 			case "ckeditor":
 			case "password":
+			case "upload":
+			case "editor":
 				if( theCol.value	!= undefined ) theCol.value 	= p_val?p_val:"";
 				if( theCol.current	!= undefined ) theCol.current 	= p_val?p_val:"";
 				ret_val = p_val?p_val:"";
@@ -908,6 +918,8 @@ WLIU.ROWACTION.prototype = {
 			case "textarea":
 			case "ckeditor":
 			case "password":
+			case "upload":
+			case "editor":
 				ret_val = p_val?p_val:"";
 				break;
 			case "checkbox":
@@ -1109,6 +1121,15 @@ WLIU.TABLEACTION.prototype = {
 		var t_row = this.getRow(theTable, ridx);
 		var t_col = this.getCol(theTable, col_name, ridx);
 		return FROW.colChange(t_row, t_col);
+	},
+	setImage: function(theTable, col_name, ridx, oImg) {
+		//var ridx = oImg.rowsn?oImg.rowsn:0;
+		var t_col = this.getCol(theTable, col_name, ridx);
+		if( t_col ) {
+			var view = "medium";
+			if(this.colMeta(theTable, col_name) && this.colMeta(theTable,col_name).view ) view = this.colMeta(theTable,col_name).view; 
+			t_col.value = oImg.resize[view].data;
+		}
 	},
 	newRow: function(theTable, keyvalues) {
 		var t_row = new  WLIU.ROW(theTable.cols, keyvalues, theTable.scope);
@@ -1316,11 +1337,12 @@ WLIU.TABLEACTION.prototype = {
 		_self.navi.loading = 1;
 		if( _self.callback.ajaxBefore && $.isFunction(_self.callback.ajaxBefore) ) _self.callback.ajaxBefore(ntable);
 		if( _self.callback.before ) if( _self.callback.before && $.isFunction(_self.callback.before) ) _self.callback.before(ntable);
+		
 		$.ajax({
 			data: {
 				table:	ntable
 			},
-			dataType: "JSON",  
+			dataType: "json",  
 			contentType:"application/x-www-form-urlencoded",
 			error: function(xhr, tStatus, errorTh ) {
 				if( _self.wait ) $(_self.wait).trigger("hide");
@@ -1517,7 +1539,7 @@ WLIU.TABLEACTION.prototype = {
 
 WLIU.FILEACTION = function(opts) {
 	this.allowSize = 20 * 1024 * 1024,	
-	this.allowType = ["PDF", "XLS", "XLSX", "DOC", "DOCX", "TXT", "*"];
+	this.allowType = ["PDF", "XLS", "XLSX", "DOC", "DOCX", "PPT", "PPTX", "TXT", "BMP", "JPG", "JPEG", "PNG", "TIF", "GIF"];
 	if(opts) {
 		if(opts.allowSize) this.allowSize = opts.allowSize;
 		if(opts.allowType) this.allowType = opts.allowType;
@@ -1530,10 +1552,11 @@ WLIU.FILEACTION.prototype = {
 		theFile.ext_name 	= file.name.extName();
 		theFile.mime_type	= file.type;
 		theFile.size  		= file.size;
-
+		theFile.errorCode		= 0;
+		theFile.errorMessage 	= "";
 		if( this.allowType.indexOf(theFile.ext_name.toUpperCase()) >= 0 || this.allowType.indexOf("*") >= 0 ) {
 			if( theFile.size <= this.allowSize ) {
-				this._fromBlob(theFile, file);
+				this._fromBlob(theFile, file, callback);
 			} else {
 				theFile.errorCode 		= 1;
 				theFile.errorMessage 	= "File size {" + theFile.size.toSize() + "} over maximum size {" + this.allowSize.toSize() + "}."; 
@@ -1651,6 +1674,8 @@ WLIU.IMAGEACTION.prototype = {
 		theImage.ext_name 	= file.name.extName();
 		theImage.mime_type 	= file.type;
 		theImage.size  		= file.size;
+		theImage.errorCode		= 0;
+		theImage.errorMessage 	= "";
 
 		if( this.allowType.indexOf(theImage.ext_name.toUpperCase()) >= 0 || this.allowType.indexOf("*") >= 0 ) {
 			if( theImage.size <= this.allowSize ) {
@@ -1716,6 +1741,10 @@ WLIU.IMAGEACTION.prototype = {
 			else 
 				return "";
 		}
+	},
+
+	resizeAll: function(theImage, callback) {
+		this._resizeAll(theImage, callback);
 	},
 
 	rotate: function(theImage, callback) {
